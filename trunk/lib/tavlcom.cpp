@@ -75,3 +75,15 @@ TAVLCom::operator!= (const TAVLCom &a)	const
 {
 	return (Niveles ()!=a.Niveles() || Inorden ()!=a.Inorden());
 }
+
+bool
+TAVLCom::EsVacio ()	const
+{
+	return (Preorden().EsVacia() && Inorden().EsVacia() && Postorden().EsVacia() && Niveles().EsVacia());
+}
+
+bool
+TAVLCom::Insertar ()
+{
+	
+}
