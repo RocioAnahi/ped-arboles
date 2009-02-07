@@ -440,7 +440,7 @@ TListaCom::InsertarI (const TComplejo& com, const TListaPos& lpos)
 	
 	bool salida = false;
 	
-	if (Obtener(lpos) != aux)
+	if (Pertenece (lpos))
 	{
 		if (lpos.pos == primero)
 		{
@@ -482,7 +482,7 @@ TListaCom::InsertarD (const TComplejo& com, const TListaPos& lpos)
 	
 	bool salida = false;
 	
-	if (Obtener (lpos)!=aux)
+	if (Pertenece (lpos))
 	{
 		if (lpos.pos==ultimo)
 		{
@@ -545,20 +545,43 @@ TListaCom::Borrar (const TComplejo& com)
 			
 			if (aux.pos == primero)
 			{
-				primero = aux.pos -> siguiente;
+				if (primero!=ultimo)
+				{
+					primero = aux.pos -> siguiente;
+					
+					primero -> anterior = NULL;
+					
+					delete aux.pos;
+				}
+				else
+				{
+					delete aux.pos;
+					
+					primero=NULL;
+					
+					ultimo=NULL;
+				}
 				
-				aux.pos -> siguiente -> anterior = NULL;
-				
-				delete aux.pos;
 			}
 			
 			else if (aux.pos == ultimo)
 			{
-				ultimo = aux.pos -> anterior;
-				
-				aux.pos -> siguiente = NULL;
-				
-				delete aux.pos;
+				if (ultimo!=primero)
+				{
+					ultimo = aux.pos -> anterior;
+					
+					ultimo -> siguiente = NULL;
+					
+					delete aux.pos;
+				}
+				else
+				{
+					delete aux.pos;
+					
+					primero=NULL;
+					
+					ultimo=NULL;
+				}
 			}
 			
 			else
@@ -649,7 +672,7 @@ TListaCom::Borrar (const TListaPos& lpos)
 	
 	bool salida = false;
 	
-	if (Obtener(lpos) != aux)
+	if (Pertenece (lpos))
 	{
 		salida = true;
 		
@@ -884,5 +907,27 @@ TListaCom::InsFinal (const TComplejo &c)
 		ultimo->siguiente=new TListaNodo;
 		ultimo->siguiente->e=c;
 		ultimo=ultimo->siguiente;
+	}
+}
+
+bool
+TListaCom::Pertenece (const TListaPos &lpos)	const
+{
+	TListaPos aux;
+	
+	aux.pos = primero;
+	
+	while (aux.pos != NULL && aux.pos != lpos.pos)
+	{
+		aux = aux.Siguiente();
+	}
+	
+	if (aux.pos != NULL)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
 	}
 }

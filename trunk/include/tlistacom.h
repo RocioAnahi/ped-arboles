@@ -322,6 +322,10 @@ class TListaCom
 		/*!	Método que inserta al final de una lista*/
 		void InsFinal (const TComplejo &);
 		
+		//!	\brief Método que nos dice si una posicion pertenece a la lista
+		/*!	Método que nos dice si una posicion pertenece a la lista*/
+		bool Pertenece (const TListaPos &)	const;
+		
 	private:
 	
 		//!	\brief	Puntero al primer elemento de la lista
