@@ -83,7 +83,7 @@ TAVLCom::EsVacio ()	const
 }
 
 bool
-TAVLCom::Insertar (const TComplejo &c)
+TAVLCom::Insertar (TComplejo &c)
 {
 	bool salida;
 	
@@ -103,7 +103,7 @@ TAVLCom::Insertar (const TComplejo &c)
 		{
 			if (raiz->iz.EsVacio() && raiz->de.EsVacio())
 			{
-				if (Comparar (raiz->item))
+				if (Comparar (c))
 				{
 					raiz->iz.raiz=new TAVLNodo;
 					raiz->iz.raiz->item=c;
@@ -116,13 +116,13 @@ TAVLCom::Insertar (const TComplejo &c)
 					salida=true;
 				}
 			}
-			else if (raiz->iz.EsVacio() && Comparar (raiz->item))
+			else if (raiz->iz.EsVacio() && Comparar (c))
 			{
 				raiz->iz.raiz=new TAVLNodo;
 				raiz->iz.raiz->item=c;
 				salida=true;
 			}
-			else if (raiz->de.EsVacio() && !Comparar (raiz->item))
+			else if (raiz->de.EsVacio() && !Comparar (c))
 			{
 				raiz->de.raiz=new TAVLNodo;
 				raiz->de.raiz->item=c;
@@ -130,7 +130,7 @@ TAVLCom::Insertar (const TComplejo &c)
 			}
 			else
 			{
-				if (Comparar (raiz->item))
+				if (Comparar (c))
 				{
 					salida=raiz->iz.Insertar (c);
 				}	
