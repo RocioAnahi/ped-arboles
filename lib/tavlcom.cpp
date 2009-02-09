@@ -64,26 +64,121 @@ TAVLCom::operator= (const TAVLCom &a)
 	return (*this);
 }
 
-bool
-TAVLCom::operator==(const TAVLCom &a)	const
-{
-	return (Niveles ()==a.Niveles() && Inorden ()==a.Inorden());
-}
-
-bool
-TAVLCom::operator!= (const TAVLCom &a)	const
-{
-	return (Niveles ()!=a.Niveles() || Inorden ()!=a.Inorden());
-}
-
+//~ bool
+//~ TAVLCom::operator==(const TAVLCom &a)	const
+//~ {
+	//~ return (Niveles ()==a.Niveles() && Inorden ()==a.Inorden());
+//~ }
+//~ 
+//~ bool
+//~ TAVLCom::operator!= (const TAVLCom &a)	const
+//~ {
+	//~ return (Niveles ()!=a.Niveles() || Inorden ()!=a.Inorden());
+//~ }
+//~ 
 bool
 TAVLCom::EsVacio ()	const
 {
-	return (Preorden().EsVacia() && Inorden().EsVacia() && Postorden().EsVacia() && Niveles().EsVacia());
+	return (raiz==NULL);
 }
 
 bool
-TAVLCom::Insertar ()
+TAVLCom::Insertar (const TComplejo &c)
 {
+	bool salida;
 	
+	if (raiz==NULL)
+	{
+		raiz=new TAVLNodo;
+		raiz->item=c;
+		salida=true;	
+	}
+	else
+	{
+		if (raiz->item==c)
+		{
+			salida=false;
+		}
+		else
+		{
+			if (raiz->iz.EsVacio() && raiz->de.EsVacio())
+			{
+				if (Comparar (raiz->item))
+				{
+					raiz->iz.raiz=new TAVLNodo;
+					raiz->iz.raiz->item=c;
+					salida=true;
+				}
+				else
+				{
+					raiz->de.raiz=new TAVLNodo;
+					raiz->de.raiz->item=c;
+					salida=true;
+				}
+			}
+			else if (raiz->iz.EsVacio() && Comparar (raiz->item))
+			{
+				raiz->iz.raiz=new TAVLNodo;
+				raiz->iz.raiz->item=c;
+				salida=true;
+			}
+			else if (raiz->de.EsVacio() && !Comparar (raiz->item))
+			{
+				raiz->de.raiz=new TAVLNodo;
+				raiz->de.raiz->item=c;
+				salida=true;
+			}
+			else
+			{
+				if (Comparar (raiz->item))
+				{
+					salida=raiz->iz.Insertar (c);
+				}	
+				else
+				{
+					salida=raiz->de.Insertar (c);
+				}
+			}
+		}
+	}
+	
+	return salida;
+}
+
+bool
+TAVLCom::Comparar (TComplejo &c)
+{
+	bool salida;
+	
+	if (raiz->item.Mod () < c.Mod())
+	{
+		salida=false;
+	}
+	else if (raiz->item.Mod () > c.Mod ())
+	{
+		salida=true;
+	}
+	else
+	{
+		if (raiz->item.Re () < c.Re ())
+		{
+			salida=false;
+		}
+		else if (raiz->item.Re () > c.Re ())
+		{
+			salida=true;
+		}
+		else
+		{
+			if (raiz->item.Im () < c.Im ())
+			{
+				salida=false;
+			}
+			else if (raiz->item.Im () > c.Im ())
+			{
+				salida=true;
+			}
+		}
+	}
+	return salida;
 }

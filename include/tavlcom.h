@@ -10,7 +10,7 @@ using namespace std;
 class TAVLNodo;
 
 class TAVLCom
-{
+{	
 	public:
 		TAVLCom ();
 		TAVLCom (const TAVLCom &);
@@ -37,10 +37,16 @@ class TAVLCom
 		void InordenAux (const TListaCom &);
 		void PreordenAux (const TListaCom &);
 		void PostdenAux (const TListaCom &);
+		
+		//True:	derecha
+		//False: izquierda
+		bool Comparar (TComplejo &);
 };
 
 class TAVLNodo
 {
+	friend class TAVLCom;
+	
 	public:
 		TAVLNodo ();
 		TAVLNodo (const TAVLNodo &);
