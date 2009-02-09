@@ -20,7 +20,7 @@ class TAVLCom
 		bool operator==(const TAVLCom &)	const;
 		bool operator!=(const TAVLCom &)	const;
 		bool EsVacio ()	const;
-		bool Insertar (const TComplejo &);
+		bool Insertar (TComplejo &);
 		bool Buscar (const TComplejo &)	const;
 		int Altura ()	const;
 		int Nodos ()	const;
