@@ -209,7 +209,7 @@ TComplejo::Arg (void)
 }
 		
 double 
-TComplejo::Mod (void)
+TComplejo::Mod (void)	const
 {
 	double resultado = 0;
 	

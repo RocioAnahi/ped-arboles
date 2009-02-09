@@ -134,10 +134,9 @@ class TComplejo
 		 * 	la raíz cuadrada de la suma de los cuadrados de la parte real y la parte imaginaria\n
 		 * 		-Entradas: no hay parámetros de entrada\n
 		 * 		-Salida: un número real*/
-		double Mod (void);
+		double Mod (void)	const;
 		
 	private:
-	
 		//! \brief	Parte real
 		/*! Parte real del número complejo*/
 		double re;
