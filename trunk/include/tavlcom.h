@@ -25,18 +25,19 @@ class TAVLCom
 		int Altura ()	const;
 		int Nodos ()	const;
 		int NodosHoja ()	const;
-		TListaCom Inorden ()	const;
-		TListaCom Preorden ()	const;
-		TListaCom Postorden ()	const;
-		TListaCom Niveles ()	const;
+		TListaCom Inorden ();
+		TListaCom Preorden ();
+		TListaCom Postorden ();
+		TListaCom Niveles ();
 		bool Borrar (const TComplejo &);
 		
 	private:
 		TAVLNodo *raiz;
 		
-		void InordenAux (const TListaCom &);
-		void PreordenAux (const TListaCom &);
-		void PostdenAux (const TListaCom &);
+		bool Equilibrar ();
+		void InordenAux (TListaCom &);
+		void PreordenAux (TListaCom &);
+		void PostdenAux (TListaCom &);
 		
 		//True:	derecha
 		//False: izquierda
