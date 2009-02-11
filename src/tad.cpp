@@ -5,24 +5,17 @@ using namespace std;
 
 int main ()
 {
-	TComplejo c1 (2,3), c2 (1,1);
+	TComplejo c1 (10,10), c2 (87,87), c3 (39,39), c4 (38,38), c5 (46,46), c6 (69,69), c7 (25,25), c8 (6,6);
 	TAVLCom a;
 	
-	cout << "mod1: " << c1.Mod() << endl;
-	cout << "mod2: " << c2.Mod() << endl;
+	a.Insertar (c1);
+	a.Insertar (c2);
+	a.Insertar (c3);
+	a.Insertar (c4);
+	a.Insertar (c5);
+	a.Insertar (c6);
+	a.Insertar (c7);
+	a.Insertar (c8);
 	
-	if (a.Insertar (c1))
-	{
-		cout << "bien" << endl;
-	}
-	
-	if (a.Insertar (c1))
-	{
-		cout << "Maaal" << endl;
-	}
-	
-	if (a.Insertar (c2))
-	{
-		cout << "reketebien" << endl;
-	}
+	cout << "Preorden: " << a.Preorden () << endl;
 }
