@@ -37,7 +37,7 @@ class TAVLCom
 		bool Equilibrar ();
 		void InordenAux (TListaCom &);
 		void PreordenAux (TListaCom &);
-		void PostdenAux (TListaCom &);
+		void PostordenAux (TListaCom &);
 		TAVLNodo* Mayor_Iz ();
 		TAVLNodo* Menor_De ();
 		

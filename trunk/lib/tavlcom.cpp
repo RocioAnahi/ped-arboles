@@ -225,6 +225,58 @@ TAVLCom::PreordenAux (TListaCom &l)
 	}
 }
 
+TListaCom 
+TAVLCom::Postorden ()
+{
+	TListaCom recorrido;
+	
+	if (!EsVacio())
+	{
+		PostordenAux (recorrido);
+	}
+	
+	return (recorrido);
+}
+
+void
+TAVLCom::PostordenAux (TListaCom &l)
+{
+	if (!EsVacio())
+	{
+		raiz -> iz.PostordenAux (l);
+		
+		raiz -> de.PostordenAux (l);
+		
+		l.InsFinal (raiz -> item);
+	}
+}
+
+TListaCom 
+TAVLCom::Inorden ()
+{
+	TListaCom recorrido;
+	
+	if (!EsVacio())
+	{
+		InordenAux (recorrido);
+	}
+	
+	return (recorrido);
+}
+
+void
+TAVLCom::InordenAux (TListaCom &l)
+{
+	if (!EsVacio())
+	{
+		raiz -> iz.InordenAux (l);
+		
+		l.InsFinal (raiz -> item);
+		
+		raiz -> de.InordenAux (l);		
+	}
+}
+
 bool
 TAVLCom::Equilibrar ()
 {
