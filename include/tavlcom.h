@@ -29,7 +29,7 @@ class TAVLCom
 		TListaCom Preorden ();
 		TListaCom Postorden ();
 		TListaCom Niveles ();
-		bool Borrar (const TComplejo &);
+		bool Borrar (TComplejo &);
 		
 	private:
 		TAVLNodo *raiz;
@@ -38,6 +38,8 @@ class TAVLCom
 		void InordenAux (TListaCom &);
 		void PreordenAux (TListaCom &);
 		void PostdenAux (TListaCom &);
+		TAVLNodo* Mayor_Iz ();
+		TAVLNodo* Menor_De ();
 		
 		//True:	derecha
 		//False: izquierda

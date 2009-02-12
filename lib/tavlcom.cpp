@@ -236,7 +236,7 @@ TAVLCom::Equilibrar ()
 	
 	if (raiz->fe==2)
 	{
-		if (raiz->de.raiz->fe==1)
+		if (raiz->de.raiz->fe==1 || raiz->de.raiz->fe==0)
 		{
 			aux=raiz;
 			raiz=aux->de.raiz;
@@ -279,7 +279,7 @@ TAVLCom::Equilibrar ()
 			
 			salida=true;
 		}
-		else if (raiz->iz.raiz->fe==-1)
+		else if (raiz->iz.raiz->fe==-1 || raiz->iz.raiz->fe==0)
 		{	
 			aux=raiz;
 			raiz=aux->iz.raiz;
@@ -316,4 +316,107 @@ TAVLCom::Altura()	const
 	{
 		return 0;
 	}
+}
+
+bool
+TAVLCom::Borrar (TComplejo &c)
+{
+	bool salida;
+	
+	if (raiz!=NULL)
+	{
+		if (raiz->item==c)
+		{
+			if (raiz->iz.EsVacio () && raiz->de.EsVacio())
+			{
+				delete raiz;
+				raiz=NULL;
+			}
+			else if (!raiz->iz.EsVacio())
+			{
+				TAVLNodo *mayor=NULL;
+				TComplejo aux;
+				
+				mayor=raiz->iz.Mayor_Iz ();
+				aux=mayor->item;
+				mayor->item=raiz->item;
+				raiz->item=aux;
+				
+				salida=raiz->iz.Borrar (c);
+				raiz->fe=raiz->de.Altura ()-raiz->iz.Altura();
+				Equilibrar ();
+			}
+			else
+			{
+				TAVLNodo *menor=NULL;
+				TComplejo aux;
+				
+				menor=raiz->de.Menor_De ();
+				aux=menor->item;
+				menor->item=raiz->item;
+				raiz->item=aux;
+				
+				salida=raiz->de.Borrar (c);
+				raiz->fe=raiz->de.Altura ()-raiz->iz.Altura();
+				Equilibrar ();
+			}
+			
+			salida=true;
+		}
+		else
+		{
+			if (Comparar (c))
+			{
+				salida=raiz->iz.Borrar (c);
+				raiz->fe=raiz->de.Altura ()-raiz->iz.Altura();
+				Equilibrar ();
+			}
+			else
+			{
+				salida=raiz->de.Borrar (c);
+				raiz->fe=raiz->de.Altura ()-raiz->iz.Altura();
+				Equilibrar ();
+			}
+		}
+	}
+	else
+	{
+		salida=false;
+	}
+	
+	return salida;
+}
+
+TAVLNodo*
+TAVLCom::Mayor_Iz ()
+{
+	TAVLNodo *aux=NULL;
+	
+	if (raiz->de.EsVacio())
+	{
+		aux=raiz;
+	}
+	else
+	{
+		aux=raiz->de.Mayor_Iz ();
+	}
+	
+	return aux;
+}
+
+TAVLNodo*
+TAVLCom::Menor_De ()
+{
+	TAVLNodo *aux=NULL;
+	
+	if (raiz->iz.EsVacio())
+	{
+		aux=raiz;
+	}
+	else
+	{
+		aux=raiz->iz.Menor_De ();
+	}
+	
+	return aux;
 }
