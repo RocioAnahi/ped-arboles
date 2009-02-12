@@ -5,7 +5,7 @@ using namespace std;
 
 int main ()
 {
-	TComplejo c1 (5,5), c2 (4,4), c3 (9,9), c4 (6,6), c5 (10,10), c6 (3,3), c7 (7,7), c8 (6,6);
+	TComplejo c1 (5,5), c2 (90,90), c3 (83,83), c4 (28,28), c5 (67,67), c6 (81,81), c7 (50,50), c8 (43,43), c9 (55,55), c10(45,45);
 	TAVLCom a;
 	
 	a.Insertar (c1);
@@ -15,12 +15,14 @@ int main ()
 	a.Insertar (c5);
 	a.Insertar (c6);
 	a.Insertar (c7);
-	//~ a.Insertar (c8);
+	a.Insertar (c8);
+	a.Insertar (c9);
+	a.Insertar (c10);
 	
-	cout << "Preorden: " << a.Preorden () << endl;
+	cout << "Inorden: " << a.Inorden () << endl;
 	
-	a.Borrar (c1);
+	//~ a.Borrar (c5);
 	
-	cout << "Preorden: " << a.Preorden () << endl;
+	//~ cout << "Preorden: " << a.Preorden () << endl;
 
 }
