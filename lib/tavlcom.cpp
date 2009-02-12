@@ -40,7 +40,7 @@ TAVLCom::TAVLCom ():raiz(NULL)
 
 TAVLCom::TAVLCom (const TAVLCom &a)
 {
-	raiz=new TAVLNodo (*a.raiz);
+	raiz=new TAVLNodo (*(a.raiz));
 }
 
 TAVLCom::~TAVLCom ()
@@ -471,4 +471,37 @@ TAVLCom::Menor_De ()
 	}
 	
 	return aux;
+}
+
+int
+TAVLCom::Nodos ()	const
+{
+	int salida=0;
+	
+	if (raiz!=NULL)
+	{
+		salida=1+raiz->de.Nodos()+raiz->iz.Nodos();
+	}
+	
+	return salida;
+}
+
+int
+TAVLCom::NodosHoja ()	const
+{
+	int salida=0;
+	
+	if (raiz!=NULL)
+	{
+		if (raiz->iz.EsVacio () && raiz->de.EsVacio ())
+		{
+			salida=1;
+		}
+		else
+		{
+			salida=raiz->iz.NodosHoja() + raiz->de.NodosHoja ();
+		}
+	}
+	
+	return salida;
 }
