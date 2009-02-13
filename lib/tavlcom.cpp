@@ -3,27 +3,30 @@ using namespace std;
 
 #include "tavlcom.h"
 
-TAVLNodo::TAVLNodo ():fe(0)
+TAVLNodo::TAVLNodo () : fe(0)
 {
 }
 
 TAVLNodo::TAVLNodo (const TAVLNodo &n)
 {
-	item=n.item;
-	iz=n.iz;
-	de=n.de;
-	fe=n.fe;
+	item = n.item;
+	
+	iz = n.iz;
+	
+	de = n.de;
+	
+	fe = n.fe;
 }
 
 TAVLNodo::~TAVLNodo ()
 {
-	fe=0;
+	fe = 0;
 }
 
 TAVLNodo&
 TAVLNodo::operator= (const TAVLNodo &n)
 {
-	if (this!=&n)
+	if (this != &n)
 	{
 		item=n.item;
 		iz=n.iz;
