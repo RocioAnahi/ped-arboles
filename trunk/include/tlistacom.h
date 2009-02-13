@@ -29,6 +29,8 @@ class TColaCom;
 /*!	Declaración forward de TPilaCom para poder declarar amistad entre las clases TLista y TPilaCom*/
 class TPilaCom;
 
+//!	\brief	Declaración forward de TVectorCom
+/*!	Declaración forward de TPilaCom para poder declarar amistad entre las clases TLista y TVectorCom*/
 class TVectorCom;
 
 
@@ -316,7 +318,7 @@ class TListaCom
 		
 		//!	\brief Método de examen de Practicas
 		/*!	Metodo de examen de practicas 08/09*/
-		TListaCom SRListas(const TListaCom&)	const;
+		TListaCom SRListas(const TListaCom&) const;
 		
 		//!	\brief Método que inserta al final de una lista
 		/*!	Método que inserta al final de una lista*/
@@ -324,7 +326,7 @@ class TListaCom
 		
 		//!	\brief Método que nos dice si una posicion pertenece a la lista
 		/*!	Método que nos dice si una posicion pertenece a la lista*/
-		bool Pertenece (const TListaPos &)	const;
+		bool Pertenece (const TListaPos &) const;
 		
 	private:
 	

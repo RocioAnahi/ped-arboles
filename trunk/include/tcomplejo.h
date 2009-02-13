@@ -137,6 +137,7 @@ class TComplejo
 		double Mod (void)	const;
 		
 	private:
+	
 		//! \brief	Parte real
 		/*! Parte real del número complejo*/
 		double re;
