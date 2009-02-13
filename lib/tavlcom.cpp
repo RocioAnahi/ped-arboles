@@ -38,9 +38,12 @@ TAVLCom::TAVLCom ():raiz(NULL)
 {
 }
 
-TAVLCom::TAVLCom (const TAVLCom &a)
+TAVLCom::TAVLCom (const TAVLCom &a):raiz(NULL)
 {
-	raiz=new TAVLNodo (*(a.raiz));
+	if (a.raiz!=NULL)
+	{
+		raiz=new TAVLNodo (*(a.raiz));
+	}
 }
 
 TAVLCom::~TAVLCom ()
@@ -59,7 +62,12 @@ TAVLCom::operator= (const TAVLCom &a)
 	{
 		if (raiz!=NULL)	delete raiz;
 		
-		raiz=new TAVLNodo (*a.raiz);
+		raiz=NULL;
+		
+		if (a.raiz!=NULL)
+		{
+			raiz=new TAVLNodo (*a.raiz);
+		}
 	}
 	
 	return (*this);
@@ -504,4 +512,213 @@ TAVLCom::NodosHoja ()	const
 	}
 	
 	return salida;
+}
+
+TListaCom
+TAVLCom::Niveles ()
+{
+	TColaAVLCom cola;
+	TListaCom salida;
+	TAVLCom *aux;
+	
+	if (!EsVacio ())
+	{
+		cola.Encolar (this);
+		
+		while (!cola.EsVacia ())
+		{
+			aux=cola.Cabeza ();
+			
+			salida.InsFinal (aux->raiz->item);
+			
+			cola.Desencolar ();
+			
+			if (!aux->raiz->iz.EsVacio ())	cola.Encolar (&aux->raiz->iz);
+			if (!aux->raiz->de.EsVacio ())	cola.Encolar (&aux->raiz->de);
+		}
+	}
+	
+	return salida;
+}
+
+TElemColaAVLCom::TElemColaAVLCom ():arbol(NULL),sig(NULL)
+{
+	
+}
+
+TElemColaAVLCom::TElemColaAVLCom (const TElemColaAVLCom &c):sig (NULL)
+{
+	arbol=c.arbol;
+}
+
+TElemColaAVLCom::~TElemColaAVLCom ()
+{
+	arbol=NULL;
+	sig=NULL;	
+}
+
+TElemColaAVLCom&
+TElemColaAVLCom::operator= (const TElemColaAVLCom &c)
+{
+	if (this!=&c)
+	{
+		arbol=NULL;
+		sig=NULL;
+		
+		arbol=c.arbol;	
+	}
+	
+	return (*this);
+}
+
+TAVLCom *
+TElemColaAVLCom::Arbol ()
+{
+	return (arbol);
+}
+
+TColaAVLCom::TColaAVLCom ():primero(NULL),ultimo(NULL)
+{
+}
+
+TColaAVLCom::TColaAVLCom (const TColaAVLCom &c):primero(NULL),ultimo(NULL)
+{
+	if (c.primero!=NULL)
+	{
+		TElemColaAVLCom *aux=c.primero;
+		
+		primero=new TElemColaAVLCom (*c.primero);
+		ultimo=primero;
+		aux=aux->sig;
+		
+		while (aux!=NULL)
+		{
+			ultimo->sig=new TElemColaAVLCom (*aux);
+			ultimo=ultimo->sig;
+			aux=aux->sig;
+		}
+	}
+}
+
+TColaAVLCom::~TColaAVLCom ()
+{
+	TElemColaAVLCom *aux;
+	aux=primero;
+	
+	while (aux!=NULL)
+	{
+		primero=aux->sig;
+		delete aux;
+		aux=primero;
+	}
+	ultimo=NULL;
+}
+
+TColaAVLCom&
+TColaAVLCom::operator= (const TColaAVLCom &c)
+{
+	if (this!=&c)
+	{
+		TElemColaAVLCom *aux;
+		aux=primero;
+		
+		while (aux!=NULL)
+		{
+			primero=aux->sig;
+			delete aux;
+			aux=primero;
+		}
+		ultimo=NULL;
+
+	//______________________________________________________________
+		
+		if (c.primero!=NULL)
+		{
+			TElemColaAVLCom *aux=c.primero;
+			
+			primero=new TElemColaAVLCom (*c.primero);
+			ultimo=primero;
+			aux=aux->sig;
+			
+			while (aux!=NULL)
+			{
+				ultimo->sig=new TElemColaAVLCom (*aux);
+				ultimo=ultimo->sig;
+				aux=aux->sig;
+			}
+		}	
+		
+	}
+	
+	return (*this);
+}
+
+bool
+TColaAVLCom::Encolar (TAVLCom *a)
+{
+	if (ultimo==NULL)
+	{
+		ultimo=new TElemColaAVLCom;
+		primero=ultimo;
+		ultimo->arbol=a;
+		return true;
+	}
+	else
+	{
+		ultimo->sig=new TElemColaAVLCom;
+		
+		if (ultimo->sig!=NULL)
+		{
+			ultimo=ultimo->sig;
+			ultimo->arbol=a;
+			return true;
+		}
+		else 	return false;
+	}
+}
+
+bool
+TColaAVLCom::Desencolar ()
+{
+	TElemColaAVLCom *aux;
+	
+	aux=primero;
+	
+	if (aux!=NULL)
+	{
+		if (primero==ultimo)
+		{
+			delete aux;
+			primero=ultimo=NULL;
+			return true;
+		}
+		else
+		{		
+			primero=primero->sig;
+			
+			delete aux;
+			
+			return true;
+		}
+	}
+	else 	return false;
+}
+
+TAVLCom *
+TColaAVLCom::Cabeza ()
+{
+	TAVLCom *aux=NULL;
+	
+	if (primero!=NULL)
+	{
+		aux=primero->arbol;
+	}
+	
+	return aux;
+}
+
+bool
+TColaAVLCom::EsVacia ()
+{
+	return (primero==NULL);
 }

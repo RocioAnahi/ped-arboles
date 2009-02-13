@@ -62,7 +62,42 @@ class TAVLNodo
 		int fe;
 };
 
+class TColaAVLCom;
 
+class TElemColaAVLCom
+{
+	friend class TColaAVLCom;
+	
+	public:
+		TElemColaAVLCom ();
+		TElemColaAVLCom (const TElemColaAVLCom &);
+		~TElemColaAVLCom ();
+		TElemColaAVLCom& operator= (const TElemColaAVLCom &);
+		
+		TAVLCom* Arbol ();
+		
+	private:
+		TAVLCom *arbol;
+		TElemColaAVLCom *sig;
+};
+
+class TColaAVLCom
+{
+	public:
+		TColaAVLCom ();
+		TColaAVLCom (const TColaAVLCom &);
+		~TColaAVLCom ();
+		TColaAVLCom& operator= (const TColaAVLCom &);
+		
+		bool Encolar (TAVLCom *);
+		bool Desencolar ();
+		TAVLCom * Cabeza ();
+		bool EsVacia ();
+		
+		private:
+			TElemColaAVLCom *primero;
+			TElemColaAVLCom *ultimo;
+};
 
 
 
