@@ -73,18 +73,18 @@ TAVLCom::operator= (const TAVLCom &a)
 	return (*this);
 }
 
-//~ bool
-//~ TAVLCom::operator==(const TAVLCom &a)	const
-//~ {
-	//~ return (Niveles ()==a.Niveles() && Inorden ()==a.Inorden());
-//~ }
-//~ 
-//~ bool
-//~ TAVLCom::operator!= (const TAVLCom &a)	const
-//~ {
-	//~ return (Niveles ()!=a.Niveles() || Inorden ()!=a.Inorden());
-//~ }
-//~ 
+bool
+TAVLCom::operator==(TAVLCom &a)
+{
+	return (Niveles ()==a.Niveles() && Inorden ()==a.Inorden());
+}
+
+bool
+TAVLCom::operator!= (TAVLCom &a)
+{
+	return (Niveles ()!=a.Niveles() || Inorden ()!=a.Inorden());
+}
+
 bool
 TAVLCom::EsVacio ()	const
 {
@@ -536,6 +536,37 @@ TAVLCom::Niveles ()
 			if (!aux->raiz->iz.EsVacio ())	cola.Encolar (&aux->raiz->iz);
 			if (!aux->raiz->de.EsVacio ())	cola.Encolar (&aux->raiz->de);
 		}
+	}
+	
+	return salida;
+}
+
+bool
+TAVLCom::Buscar (TComplejo &c)
+{
+	bool salida;
+	
+	if (!EsVacio ())
+	{
+		if (raiz->item==c)
+		{
+			salida=true;
+		}
+		else
+		{
+			if (Comparar (c))
+			{
+				salida=raiz->iz.Buscar (c);
+			}
+			else
+			{
+				salida=raiz->de.Buscar (c);
+			}
+		}
+	}
+	else
+	{
+		salida=false;
 	}
 	
 	return salida;

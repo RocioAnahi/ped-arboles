@@ -17,11 +17,11 @@ class TAVLCom
 		~TAVLCom ();
 		TAVLCom& operator= (const TAVLCom&);
 		
-		bool operator==(const TAVLCom &)	const;
-		bool operator!=(const TAVLCom &)	const;
+		bool operator==(TAVLCom &);
+		bool operator!=(TAVLCom &);
 		bool EsVacio ()	const;
 		bool Insertar (TComplejo &);
-		bool Buscar (const TComplejo &)	const;
+		bool Buscar (TComplejo &);
 		int Altura ()	const;
 		int Nodos ()	const;
 		int NodosHoja ()	const;
