@@ -8,7 +8,7 @@
 # define _TA234COM_
 
 # include <iostream>
-//HOLAAAAAAAAAAAAAAAAAAAAAAA
+
 using namespace std;
 
 # include "tcomplejo.h"
