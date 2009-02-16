@@ -1,9 +1,10 @@
-#include <iostream>
+# include <iostream>
+
 using namespace std;
 
-#include "tavlcom.h"
+# include "tavlcom.h"
 
-TAVLNodo::TAVLNodo () : fe(0)
+TAVLNodo::TAVLNodo (): fe(0)
 {
 }
 
@@ -28,48 +29,55 @@ TAVLNodo::operator= (const TAVLNodo &n)
 {
 	if (this != &n)
 	{
-		item=n.item;
-		iz=n.iz;
-		de=n.de;
-		fe=n.fe;
+		item = n.item;
+		
+		iz = n.iz;
+		
+		de = n.de;
+		
+		fe = n.fe;
 	}
 	
 	return (*this);
 }
 
-TAVLCom::TAVLCom ():raiz(NULL)
+TAVLCom::TAVLCom (): raiz(NULL)
 {
 }
 
-TAVLCom::TAVLCom (const TAVLCom &a):raiz(NULL)
+TAVLCom::TAVLCom (const TAVLCom &a): raiz(NULL)
 {
-	if (a.raiz!=NULL)
+	if (a.raiz != NULL)
 	{
-		raiz=new TAVLNodo (*(a.raiz));
+		raiz = new TAVLNodo (*(a.raiz));
 	}
 }
 
 TAVLCom::~TAVLCom ()
 {
-	if (raiz!=NULL)
+	if (raiz != NULL)
 	{
 		delete raiz;
-		raiz=NULL;
+		
+		raiz = NULL;
 	}
 }
 
 TAVLCom&
 TAVLCom::operator= (const TAVLCom &a)
 {
-	if (this!=&a)
+	if (this != &a)
 	{
-		if (raiz!=NULL)	delete raiz;
-		
-		raiz=NULL;
-		
-		if (a.raiz!=NULL)
+		if (raiz != NULL)	
 		{
-			raiz=new TAVLNodo (*a.raiz);
+			delete raiz;
+		
+			raiz = NULL;
+		}
+		
+		if (a.raiz != NULL)
+		{
+			raiz = new TAVLNodo (*a.raiz);
 		}
 	}
 	
@@ -77,101 +85,129 @@ TAVLCom::operator= (const TAVLCom &a)
 }
 
 bool
-TAVLCom::operator==(TAVLCom &a)
+TAVLCom::operator== (TAVLCom &a)
 {
-	return (Niveles ()==a.Niveles() && Inorden ()==a.Inorden());
+	return (Niveles() == a.Niveles() && Inorden() == a.Inorden());
 }
 
 bool
 TAVLCom::operator!= (TAVLCom &a)
 {
-	return (Niveles ()!=a.Niveles() || Inorden ()!=a.Inorden());
+	return (Niveles () != a.Niveles() || Inorden () != a.Inorden());
 }
 
 bool
 TAVLCom::EsVacio ()	const
 {
-	return (raiz==NULL);
+	return (raiz == NULL);
 }
 
 bool
 TAVLCom::Insertar (TComplejo &c)
 {
 	bool salida;
+	
 	bool eq;
 	
-	if (raiz==NULL)
+	if (raiz == NULL)
 	{
-		raiz=new TAVLNodo;
-		raiz->item=c;
-		salida=true;	
+		raiz = new TAVLNodo;
+		
+		raiz -> item = c;
+		
+		salida = true;	
 	}
+	
 	else
 	{
-		if (raiz->item==c)
+		if (raiz -> item == c)
 		{
-			salida=false;
+			salida = false;
 		}
+		
 		else
 		{
-			if (raiz->iz.EsVacio() && raiz->de.EsVacio())
+			if (raiz -> iz.EsVacio() && raiz -> de.EsVacio())
 			{
 				if (Comparar (c))
 				{
-					raiz->iz.raiz=new TAVLNodo;
-					raiz->iz.raiz->item=c;
-					salida=true;
-					raiz->fe--;
+					raiz -> iz.raiz = new TAVLNodo;
+					
+					raiz -> iz.raiz -> item = c;
+					
+					salida = true;
+					
+					raiz -> fe--;
 				}
+				
 				else
 				{
-					raiz->de.raiz=new TAVLNodo;
-					raiz->de.raiz->item=c;
-					salida=true;
-					raiz->fe++;
+					raiz -> de.raiz = new TAVLNodo;
+					
+					raiz -> de.raiz -> item = c;
+					
+					salida = true;
+					
+					raiz -> fe++;
 				}
 			}
-			else if (raiz->iz.EsVacio() && Comparar (c))
+			
+			else if (raiz -> iz.EsVacio() && Comparar (c))
 			{
-				raiz->iz.raiz=new TAVLNodo;
-				raiz->iz.raiz->item=c;
-				salida=true;
-				raiz->fe--;
+				raiz -> iz.raiz = new TAVLNodo;
+				
+				raiz -> iz.raiz -> item = c;
+				
+				salida = true;
+				
+				raiz -> fe--;
 			}
-			else if (raiz->de.EsVacio() && !Comparar (c))
+			
+			else if (raiz -> de.EsVacio() && !Comparar (c))
 			{
-				raiz->de.raiz=new TAVLNodo;
-				raiz->de.raiz->item=c;
-				salida=true;
-				raiz->fe++;
+				raiz -> de.raiz = new TAVLNodo;
+				
+				raiz -> de.raiz -> item = c;
+				
+				salida = true;
+				
+				raiz -> fe++;
 			}
+			
 			else
 			{
 				if (Comparar (c))
 				{
-					salida=raiz->iz.Insertar (c);
-					if (salida==true)
+					salida = raiz -> iz.Insertar (c);
+					
+					if (salida == true)
 					{
-						raiz->fe--;
-						raiz->fe=raiz->de.Altura()-raiz->iz.Altura();
-						eq=Equilibrar ();
+						raiz -> fe--;
+						
+						raiz -> fe = (raiz -> de.Altura()) - (raiz -> iz.Altura());
+						
+						eq = Equilibrar ();
 					}
 				}	
+				
 				else
 				{
-					salida=raiz->de.Insertar (c);
-					if (salida==true)
+					salida = raiz -> de.Insertar (c);
+					
+					if (salida == true)
 					{
-						raiz->fe++;
-						raiz->fe=raiz->de.Altura()-raiz->iz.Altura();
-						eq=Equilibrar ();
+						raiz -> fe++;
+						
+						raiz -> fe = (raiz -> de.Altura()) - (raiz -> iz.Altura());
+						
+						eq = Equilibrar ();
 					}
 				}
 			}
 		}
 	}
 	
-	return salida;
+	return (salida);
 }
 
 bool
@@ -179,37 +215,42 @@ TAVLCom::Comparar (TComplejo &c)
 {
 	bool salida;
 	
-	if (raiz->item.Mod () < c.Mod())
+	if (raiz -> item.Mod () < c.Mod())
 	{
-		salida=false;
+		salida = false;
 	}
-	else if (raiz->item.Mod () > c.Mod ())
+	
+	else if (raiz -> item.Mod () > c.Mod ())
 	{
-		salida=true;
+		salida = true;
 	}
+	
 	else
 	{
-		if (raiz->item.Re () < c.Re ())
+		if (raiz -> item.Re () < c.Re ())
 		{
-			salida=false;
+			salida = false;
 		}
-		else if (raiz->item.Re () > c.Re ())
+		
+		else if (raiz -> item.Re () > c.Re ())
 		{
-			salida=true;
+			salida = true;
 		}
+		
 		else
 		{
-			if (raiz->item.Im () < c.Im ())
+			if (raiz -> item.Im () < c.Im ())
 			{
-				salida=false;
+				salida = false;
 			}
-			else if (raiz->item.Im () > c.Im ())
+			
+			else if (raiz -> item.Im () > c.Im ())
 			{
-				salida=true;
+				salida = true;
 			}
 		}
 	}
-	return salida;
+	return (salida);
 }
 
 TListaCom
@@ -222,7 +263,7 @@ TAVLCom::Preorden ()
 		PreordenAux (recorrido);
 	}
 	
-	return recorrido;
+	return (recorrido);
 }
 
 void
@@ -230,9 +271,11 @@ TAVLCom::PreordenAux (TListaCom &l)
 {
 	if (!EsVacio ())
 	{
-		l.InsFinal (raiz->item);
-		raiz->iz.PreordenAux (l);
-		raiz->de.PreordenAux (l);
+		l.InsFinal (raiz -> item);
+		
+		raiz -> iz.PreordenAux (l);
+		
+		raiz -> de.PreordenAux (l);
 	}
 }
 
@@ -291,93 +334,120 @@ TAVLCom::InordenAux (TListaCom &l)
 bool
 TAVLCom::Equilibrar ()
 {
-	bool salida=false;
+	bool salida = false;
 	
-	TAVLNodo *aux=NULL;
-	TAVLNodo *aux2=NULL;
-	TAVLNodo *aux3=NULL;
+	TAVLNodo *aux = NULL;
 	
-	if (raiz->fe==2)
+	TAVLNodo *aux2 = NULL;
+	
+	TAVLNodo *aux3 = NULL;
+	
+	if (raiz -> fe == 2)
 	{
-		if (raiz->de.raiz->fe==1 || raiz->de.raiz->fe==0)
+		if (raiz -> de.raiz -> fe == 1 || raiz -> de.raiz -> fe == 0)
 		{
-			aux=raiz;
-			raiz=aux->de.raiz;
-			aux2=raiz->iz.raiz;
-			raiz->iz.raiz=aux;
-			aux->de.raiz=aux2;
+			aux = raiz;
+			
+			raiz = aux -> de.raiz;
+			
+			aux2 = raiz -> iz.raiz;
+			
+			raiz -> iz.raiz = aux;
+			
+			aux -> de.raiz = aux2;
 
-			salida=true;
+			salida = true;
 		}
-		else if (raiz->de.raiz->fe==-1)
+		
+		else if (raiz -> de.raiz -> fe == -1)
 		{
-			aux=raiz;
-			aux2=raiz->de.raiz->iz.raiz->de.raiz;
-			aux3=raiz->de.raiz->iz.raiz->iz.raiz;
+			aux = raiz;
 			
-			raiz=aux->de.raiz->iz.raiz;
-			raiz->iz.raiz=aux;
-			raiz->de.raiz=aux->de.raiz;
-			raiz->iz.raiz->de.raiz=aux3;
-			raiz->de.raiz->iz.raiz=aux2;
+			aux2 = raiz -> de.raiz -> iz.raiz -> de.raiz;
 			
-			salida=true;
-		}
-	}
-	else if (raiz->fe==-2)
-	{
-		if (raiz->iz.raiz->fe==1)
-		{
-			aux=raiz;
-			aux2=raiz->iz.raiz->de.raiz->de.raiz;
-			aux3=raiz->iz.raiz->de.raiz->iz.raiz;
+			aux3 = raiz -> de.raiz -> iz.raiz -> iz.raiz;
 			
-			raiz=aux->iz.raiz->de.raiz;
-			raiz->iz.raiz=aux->iz.raiz;
-			raiz->de.raiz=aux;
-			raiz->iz.raiz->de.raiz=aux3;
-			raiz->de.raiz->iz.raiz=aux2;
+			raiz = aux -> de.raiz -> iz.raiz;
 			
+			raiz -> iz.raiz = aux;
 			
+			raiz -> de.raiz = aux -> de.raiz;
 			
-			salida=true;
-		}
-		else if (raiz->iz.raiz->fe==-1 || raiz->iz.raiz->fe==0)
-		{	
-			aux=raiz;
-			raiz=aux->iz.raiz;
-			aux2=raiz->de.raiz;
-			raiz->de.raiz=aux;
-			aux->iz.raiz=aux2;
+			raiz -> iz.raiz -> de.raiz = aux3;
 			
-			salida=true;
+			raiz -> de.raiz -> iz.raiz = aux2;
+			
+			salida = true;
 		}
 	}
 	
-	return salida;
+	else if (raiz -> fe == -2)
+	{
+		if (raiz -> iz.raiz -> fe == 1)
+		{
+			aux = raiz;
+			
+			aux2 = raiz -> iz.raiz -> de.raiz -> de.raiz;
+			
+			aux3 = raiz -> iz.raiz -> de.raiz -> iz.raiz;
+			
+			raiz = aux -> iz.raiz -> de.raiz;
+			
+			raiz -> iz.raiz = aux -> iz.raiz;
+			
+			raiz -> de.raiz = aux;
+			
+			raiz -> iz.raiz -> de.raiz = aux3;
+			
+			raiz -> de.raiz -> iz.raiz = aux2;
+			
+			salida = true;
+		}
+		
+		else if (raiz -> iz.raiz -> fe == -1 || raiz -> iz.raiz -> fe == 0)
+		{	
+			aux = raiz;
+			
+			raiz = aux -> iz.raiz;
+			
+			aux2 = raiz -> de.raiz;
+			
+			raiz -> de.raiz = aux;
+			
+			aux -> iz.raiz = aux2;
+			
+			salida = true;
+		}
+	}
+	
+	return (salida);
 }
 
 int
-TAVLCom::Altura()	const
+TAVLCom::Altura() const
 {
 	int a1, a2;
 	
-	if (raiz!=NULL)
+	if (raiz != NULL)
 	{
-		a1=raiz->iz.Altura();
-		a2=raiz->de.Altura();
-		if (a1<a2)
+		a1 = raiz -> iz.Altura();
+		
+		a2 = raiz -> de.Altura();
+		
+		if (a1 < a2)
 		{
-			return (1+a2);
+			return (1 + a2);
 		}
+		
 		else
 		{
-			return (1+a1);
+			return (1 + a1);
 		}
 	}
+	
 	else
 	{
-		return 0;
+		return (0);
 	}
 }
 
@@ -386,142 +456,169 @@ TAVLCom::Borrar (TComplejo &c)
 {
 	bool salida;
 	
-	if (raiz!=NULL)
+	if (raiz != NULL)
 	{
-		if (raiz->item==c)
+		if (raiz -> item == c)
 		{
-			if (raiz->iz.EsVacio () && raiz->de.EsVacio())
+			if (raiz -> iz.EsVacio () && raiz -> de.EsVacio())
 			{
 				delete raiz;
-				raiz=NULL;
+				
+				raiz = NULL;
 			}
-			else if (!raiz->iz.EsVacio())
+			
+			else if (!raiz -> iz.EsVacio())
 			{
-				TAVLNodo *mayor=NULL;
+				TAVLNodo *mayor = NULL;
+				
 				TComplejo aux;
 				
-				mayor=raiz->iz.Mayor_Iz ();
-				aux=mayor->item;
-				mayor->item=raiz->item;
-				raiz->item=aux;
+				mayor = raiz -> iz.Mayor_Iz ();
 				
-				salida=raiz->iz.Borrar (c);
-				raiz->fe=raiz->de.Altura ()-raiz->iz.Altura();
-				Equilibrar ();
-			}
-			else
-			{
-				TAVLNodo *menor=NULL;
-				TComplejo aux;
+				aux = mayor -> item;
 				
-				menor=raiz->de.Menor_De ();
-				aux=menor->item;
-				menor->item=raiz->item;
-				raiz->item=aux;
+				mayor -> item = raiz -> item;
 				
-				salida=raiz->de.Borrar (c);
-				raiz->fe=raiz->de.Altura ()-raiz->iz.Altura();
+				raiz -> item = aux;
+				
+				salida = raiz -> iz.Borrar (c);
+				
+				raiz -> fe = raiz -> de.Altura ()-raiz -> iz.Altura();
+				
 				Equilibrar ();
 			}
 			
-			salida=true;
+			else
+			{
+				TAVLNodo *menor = NULL;
+				
+				TComplejo aux;
+				
+				menor = raiz -> de.Menor_De ();
+				
+				aux = menor -> item;
+				
+				menor -> item = raiz -> item;
+				
+				raiz -> item = aux;
+				
+				salida = raiz -> de.Borrar (c);
+				
+				raiz -> fe = raiz -> de.Altura () - raiz -> iz.Altura();
+				
+				Equilibrar ();
+			}
+			
+			salida = true;
 		}
+		
 		else
 		{
 			if (Comparar (c))
 			{
-				salida=raiz->iz.Borrar (c);
-				raiz->fe=raiz->de.Altura ()-raiz->iz.Altura();
+				salida = raiz -> iz.Borrar (c);
+		
+				raiz -> fe = raiz -> de.Altura () - raiz -> iz.Altura();
+		
 				Equilibrar ();
 			}
+			
 			else
 			{
-				salida=raiz->de.Borrar (c);
-				raiz->fe=raiz->de.Altura ()-raiz->iz.Altura();
+				salida = raiz -> de.Borrar (c);
+				
+				raiz -> fe = raiz -> de.Altura () - raiz -> iz.Altura();
+				
 				Equilibrar ();
 			}
 		}
 	}
+	
 	else
 	{
-		salida=false;
+		salida = false;
 	}
 	
-	return salida;
+	return (salida);
 }
 
 TAVLNodo*
 TAVLCom::Mayor_Iz ()
 {
-	TAVLNodo *aux=NULL;
+	TAVLNodo *aux = NULL;
 	
-	if (raiz->de.EsVacio())
+	if (raiz -> de.EsVacio())
 	{
-		aux=raiz;
+		aux = raiz;
 	}
+	
 	else
 	{
-		aux=raiz->de.Mayor_Iz ();
+		aux = raiz -> de.Mayor_Iz ();
 	}
 	
-	return aux;
+	return (aux);
 }
 
 TAVLNodo*
 TAVLCom::Menor_De ()
 {
-	TAVLNodo *aux=NULL;
+	TAVLNodo *aux = NULL;
 	
-	if (raiz->iz.EsVacio())
+	if (raiz -> iz.EsVacio())
 	{
-		aux=raiz;
+		aux = raiz;
 	}
+	
 	else
 	{
-		aux=raiz->iz.Menor_De ();
+		aux = raiz -> iz.Menor_De ();
 	}
 	
-	return aux;
+	return (aux);
 }
 
 int
-TAVLCom::Nodos ()	const
+TAVLCom::Nodos () const
 {
-	int salida=0;
+	int salida = 0;
 	
-	if (raiz!=NULL)
+	if (raiz != NULL)
 	{
-		salida=1+raiz->de.Nodos()+raiz->iz.Nodos();
+		salida = 1 + (raiz -> de.Nodos()) + (raiz -> iz.Nodos());
 	}
 	
-	return salida;
+	return (salida);
 }
 
 int
-TAVLCom::NodosHoja ()	const
+TAVLCom::NodosHoja () const
 {
-	int salida=0;
+	int salida = 0;
 	
-	if (raiz!=NULL)
+	if (raiz != NULL)
 	{
-		if (raiz->iz.EsVacio () && raiz->de.EsVacio ())
+		if (raiz -> iz.EsVacio () && raiz -> de.EsVacio ())
 		{
-			salida=1;
+			salida = 1;
 		}
+		
 		else
 		{
-			salida=raiz->iz.NodosHoja() + raiz->de.NodosHoja ();
+			salida = raiz -> iz.NodosHoja() + raiz -> de.NodosHoja ();
 		}
 	}
 	
-	return salida;
+	return (salida);
 }
 
 TListaCom
 TAVLCom::Niveles ()
 {
 	TColaAVLCom cola;
+	
 	TListaCom salida;
+	
 	TAVLCom *aux;
 	
 	if (!EsVacio ())
@@ -530,18 +627,25 @@ TAVLCom::Niveles ()
 		
 		while (!cola.EsVacia ())
 		{
-			aux=cola.Cabeza ();
+			aux = cola.Cabeza ();
 			
-			salida.InsFinal (aux->raiz->item);
+			salida.InsFinal (aux -> raiz -> item);
 			
 			cola.Desencolar ();
 			
-			if (!aux->raiz->iz.EsVacio ())	cola.Encolar (&aux->raiz->iz);
-			if (!aux->raiz->de.EsVacio ())	cola.Encolar (&aux->raiz->de);
+			if (!aux->raiz->iz.EsVacio ())	
+			{
+				cola.Encolar (&aux -> raiz -> iz);
+			}
+			
+			if (!aux->raiz->de.EsVacio ())	
+			{
+				cola.Encolar (&aux -> raiz -> de);
+			}
 		}
 	}
 	
-	return salida;
+	return (salida);
 }
 
 bool
@@ -551,55 +655,59 @@ TAVLCom::Buscar (TComplejo &c)
 	
 	if (!EsVacio ())
 	{
-		if (raiz->item==c)
+		if (raiz -> item == c)
 		{
-			salida=true;
+			salida = true;
 		}
+		
 		else
 		{
 			if (Comparar (c))
 			{
-				salida=raiz->iz.Buscar (c);
+				salida = raiz -> iz.Buscar (c);
 			}
+			
 			else
 			{
-				salida=raiz->de.Buscar (c);
+				salida = raiz -> de.Buscar (c);
 			}
 		}
 	}
+	
 	else
 	{
-		salida=false;
+		salida = false;
 	}
 	
-	return salida;
+	return (salida);
 }
 
-TElemColaAVLCom::TElemColaAVLCom ():arbol(NULL),sig(NULL)
+TElemColaAVLCom::TElemColaAVLCom (): arbol(NULL), sig(NULL)
 {
-	
 }
 
-TElemColaAVLCom::TElemColaAVLCom (const TElemColaAVLCom &c):sig (NULL)
+TElemColaAVLCom::TElemColaAVLCom (const TElemColaAVLCom &c): sig(NULL)
 {
-	arbol=c.arbol;
+	arbol = c.arbol;
 }
 
 TElemColaAVLCom::~TElemColaAVLCom ()
 {
-	arbol=NULL;
-	sig=NULL;	
+	arbol = NULL;
+	
+	sig = NULL;	
 }
 
 TElemColaAVLCom&
 TElemColaAVLCom::operator= (const TElemColaAVLCom &c)
 {
-	if (this!=&c)
+	if (this != &c)
 	{
-		arbol=NULL;
-		sig=NULL;
+		arbol = NULL;
 		
-		arbol=c.arbol;	
+		sig = NULL;
+		
+		arbol = c.arbol;	
 	}
 	
 	return (*this);
@@ -611,25 +719,29 @@ TElemColaAVLCom::Arbol ()
 	return (arbol);
 }
 
-TColaAVLCom::TColaAVLCom ():primero(NULL),ultimo(NULL)
+TColaAVLCom::TColaAVLCom (): primero(NULL), ultimo(NULL)
 {
 }
 
-TColaAVLCom::TColaAVLCom (const TColaAVLCom &c):primero(NULL),ultimo(NULL)
+TColaAVLCom::TColaAVLCom (const TColaAVLCom &c): primero(NULL), ultimo(NULL)
 {
-	if (c.primero!=NULL)
+	if (c.primero != NULL)
 	{
-		TElemColaAVLCom *aux=c.primero;
+		TElemColaAVLCom *aux = c.primero;
 		
-		primero=new TElemColaAVLCom (*c.primero);
-		ultimo=primero;
-		aux=aux->sig;
+		primero = new TElemColaAVLCom (*c.primero);
 		
-		while (aux!=NULL)
+		ultimo = primero;
+		
+		aux = aux -> sig;
+		
+		while (aux != NULL)
 		{
-			ultimo->sig=new TElemColaAVLCom (*aux);
-			ultimo=ultimo->sig;
-			aux=aux->sig;
+			ultimo -> sig = new TElemColaAVLCom (*aux);
+			
+			ultimo = ultimo -> sig;
+			
+			aux = aux -> sig;
 		}
 	}
 }
@@ -637,51 +749,60 @@ TColaAVLCom::TColaAVLCom (const TColaAVLCom &c):primero(NULL),ultimo(NULL)
 TColaAVLCom::~TColaAVLCom ()
 {
 	TElemColaAVLCom *aux;
-	aux=primero;
 	
-	while (aux!=NULL)
+	aux = primero;
+	
+	while (aux != NULL)
 	{
-		primero=aux->sig;
+		primero = aux -> sig;
+		
 		delete aux;
-		aux=primero;
+		
+		aux = primero;
 	}
-	ultimo=NULL;
+	
+	ultimo = NULL;
 }
 
 TColaAVLCom&
 TColaAVLCom::operator= (const TColaAVLCom &c)
 {
-	if (this!=&c)
+	if (this != &c)
 	{
 		TElemColaAVLCom *aux;
-		aux=primero;
 		
-		while (aux!=NULL)
+		aux = primero;
+		
+		while (aux != NULL)
 		{
-			primero=aux->sig;
+			primero = aux -> sig;
+			
 			delete aux;
-			aux=primero;
+			
+			aux = primero;
 		}
-		ultimo=NULL;
-
-	//______________________________________________________________
 		
-		if (c.primero!=NULL)
+		ultimo = NULL;
+
+		if (c.primero != NULL)
 		{
-			TElemColaAVLCom *aux=c.primero;
+			TElemColaAVLCom *aux = c.primero;
 			
-			primero=new TElemColaAVLCom (*c.primero);
-			ultimo=primero;
-			aux=aux->sig;
+			primero = new TElemColaAVLCom (*c.primero);
 			
-			while (aux!=NULL)
+			ultimo = primero;
+			
+			aux = aux -> sig;
+			
+			while (aux != NULL)
 			{
-				ultimo->sig=new TElemColaAVLCom (*aux);
-				ultimo=ultimo->sig;
-				aux=aux->sig;
+				ultimo -> sig = new TElemColaAVLCom (*aux);
+				
+				ultimo = ultimo -> sig;
+				
+				aux = aux -> sig;
 			}
 		}	
-		
 	}
 	
 	return (*this);
@@ -690,24 +811,34 @@ TColaAVLCom::operator= (const TColaAVLCom &c)
 bool
 TColaAVLCom::Encolar (TAVLCom *a)
 {
-	if (ultimo==NULL)
+	if (ultimo == NULL)
 	{
-		ultimo=new TElemColaAVLCom;
-		primero=ultimo;
-		ultimo->arbol=a;
-		return true;
+		ultimo = new TElemColaAVLCom;
+	
+		primero = ultimo;
+	
+		ultimo -> arbol = a;
+	
+		return (true);
 	}
+	
 	else
 	{
-		ultimo->sig=new TElemColaAVLCom;
+		ultimo -> sig = new TElemColaAVLCom;
 		
-		if (ultimo->sig!=NULL)
+		if (ultimo -> sig != NULL)
 		{
-			ultimo=ultimo->sig;
-			ultimo->arbol=a;
-			return true;
+			ultimo = ultimo -> sig;
+			
+			ultimo -> arbol = a;
+			
+			return (true);
 		}
-		else 	return false;
+		
+		else 	
+		{
+			return (false);
+		}
 	}
 }
 
@@ -716,43 +847,50 @@ TColaAVLCom::Desencolar ()
 {
 	TElemColaAVLCom *aux;
 	
-	aux=primero;
+	aux = primero;
 	
-	if (aux!=NULL)
+	if (aux != NULL)
 	{
-		if (primero==ultimo)
+		if (primero == ultimo)
 		{
 			delete aux;
-			primero=ultimo=NULL;
-			return true;
+			
+			primero = ultimo = NULL;
+			
+			return (true);
 		}
+		
 		else
 		{		
-			primero=primero->sig;
+			primero = primero -> sig;
 			
 			delete aux;
 			
-			return true;
+			return (true);
 		}
 	}
-	else 	return false;
+	
+	else 	
+	{
+		return (false);
+	}
 }
 
 TAVLCom *
 TColaAVLCom::Cabeza ()
 {
-	TAVLCom *aux=NULL;
+	TAVLCom *aux = NULL;
 	
-	if (primero!=NULL)
+	if (primero != NULL)
 	{
-		aux=primero->arbol;
+		aux = primero -> arbol;
 	}
 	
-	return aux;
+	return (aux);
 }
 
 bool
 TColaAVLCom::EsVacia ()
 {
-	return (primero==NULL);
+	return (primero == NULL);
 }
