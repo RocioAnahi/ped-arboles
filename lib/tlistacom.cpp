@@ -297,6 +297,11 @@ TListaCom::operator== (const TListaCom& lcom) const
 		while (aux_this.pos != ultimo && salida == true);	
 	}
 	
+	else if (Longitud() == 0 && lcom.Longitud() == 0)
+	{
+		salida = true;
+	}
+	
 	else
 	{
 		salida = false;
@@ -484,7 +489,7 @@ TListaCom::InsertarD (const TComplejo& com, const TListaPos& lpos)
 	
 	if (Pertenece (lpos))
 	{
-		if (lpos.pos==ultimo)
+		if (lpos.pos == ultimo)
 		{
 			lpos.pos -> siguiente = new TListaNodo;
 			
@@ -545,7 +550,7 @@ TListaCom::Borrar (const TComplejo& com)
 			
 			if (aux.pos == primero)
 			{
-				if (primero!=ultimo)
+				if (primero != ultimo)
 				{
 					primero = aux.pos -> siguiente;
 					
@@ -553,20 +558,20 @@ TListaCom::Borrar (const TComplejo& com)
 					
 					delete aux.pos;
 				}
+				
 				else
 				{
 					delete aux.pos;
 					
-					primero=NULL;
+					primero = NULL;
 					
-					ultimo=NULL;
+					ultimo = NULL;
 				}
-				
 			}
 			
 			else if (aux.pos == ultimo)
 			{
-				if (ultimo!=primero)
+				if (ultimo != primero)
 				{
 					ultimo = aux.pos -> anterior;
 					
@@ -578,9 +583,9 @@ TListaCom::Borrar (const TComplejo& com)
 				{
 					delete aux.pos;
 					
-					primero=NULL;
+					primero = NULL;
 					
-					ultimo=NULL;
+					ultimo = NULL;
 				}
 			}
 			
@@ -841,77 +846,90 @@ TListaCom::SRListas(const TListaCom &l)	const
 {
 	TListaCom salida;
 
-	TListaPos it1,it2,it3;
+	TListaPos it1, it2, it3;
 	
-	it1=this->Primera ();
-	it2=l.Primera();
+	it1 = this -> Primera();
+	
+	it2 = l.Primera();
 
-	while (!it1.EsVacia () || !it2.EsVacia())
+	while (!it1.EsVacia() || !it2.EsVacia())
 	{
 		if (!it1.EsVacia () && !it2.EsVacia())
 		{
-			if (l.Obtener (it2).Re()>(this->Obtener (it1).Re()))
+			if (l.Obtener(it2).Re() > (this -> Obtener (it1).Re()))
 			{
-				salida.InsFinal (l.Obtener (it2)+this->Obtener (it1));
+				salida.InsFinal (l.Obtener (it2) + this -> Obtener (it1));
 			}
-			else if (l.Obtener (it2).Re()<(this->Obtener (it1).Re()))
+			
+			else if (l.Obtener (it2).Re() < (this -> Obtener (it1).Re()))
 			{
-				salida.InsFinal (this->Obtener (it1)-l.Obtener (it2));
+				salida.InsFinal (this -> Obtener (it1) - l.Obtener (it2));
 			}
+			
 			else
 			{
-				if (l.Obtener (it2).Im()>this->Obtener (it1).Im())
+				if (l.Obtener (it2).Im() > this -> Obtener (it1).Im())
 				{
-					salida.InsFinal (l.Obtener (it2)+this->Obtener (it1));
+					salida.InsFinal (l.Obtener (it2) + this -> Obtener (it1));
 				}
-				else if (l.Obtener (it2).Im()<this->Obtener (it1).Im())
+				
+				else if (l.Obtener (it2).Im() < this -> Obtener (it1).Im())
 				{
-					salida.InsFinal (this->Obtener (it1)-l.Obtener (it2));
+					salida.InsFinal (this -> Obtener (it1) - l.Obtener (it2));
 				}
+				
 				else
 				{
-					salida.InsFinal (this->Obtener (it1)-l.Obtener (it2));
+					salida.InsFinal (this -> Obtener (it1) - l.Obtener (it2));
 				}
 			}
 		}
+		
 		else
 		{
 			if (it1.EsVacia())
 			{
 				salida.InsFinal (l.Obtener (it2));
 			}
+			
 			else
 			{
-				salida.InsFinal (this->Obtener (it1));
+				salida.InsFinal (this -> Obtener (it1));
 			}
 		}
 
-		it1=it1.Siguiente();
-		it2=it2.Siguiente();
+		it1 = it1.Siguiente();
+		
+		it2 = it2.Siguiente();
 	}
-	return salida;
-
+	
+	return (salida);
 }
 
 void
 TListaCom::InsFinal (const TComplejo &c)
 {
-	if (ultimo==NULL)
+	if (ultimo == NULL)
 	{
-		primero=new TListaNodo;
-		ultimo=primero;
-		primero->e=c;
+		primero = new TListaNodo;
+		
+		ultimo = primero;
+		
+		primero -> e = c;
 	}
+	
 	else
 	{
-		ultimo->siguiente=new TListaNodo;
-		ultimo->siguiente->e=c;
-		ultimo=ultimo->siguiente;
+		ultimo -> siguiente = new TListaNodo;
+		
+		ultimo -> siguiente -> e = c;
+		
+		ultimo = ultimo -> siguiente;
 	}
 }
 
 bool
-TListaCom::Pertenece (const TListaPos &lpos)	const
+TListaCom::Pertenece (const TListaPos &lpos) const
 {
 	TListaPos aux;
 	
@@ -924,10 +942,10 @@ TListaCom::Pertenece (const TListaPos &lpos)	const
 	
 	if (aux.pos != NULL)
 	{
-		return true;
+		return (true);
 	}
 	else
 	{
-		return false;
+		return (false);
 	}
 }
