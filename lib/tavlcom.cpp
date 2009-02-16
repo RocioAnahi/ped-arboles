@@ -107,8 +107,6 @@ TAVLCom::Insertar (TComplejo &c)
 {
 	bool salida;
 	
-	bool eq;
-	
 	if (raiz == NULL)
 	{
 		raiz = new TAVLNodo;
@@ -182,11 +180,9 @@ TAVLCom::Insertar (TComplejo &c)
 					
 					if (salida == true)
 					{
-						raiz -> fe--;
-						
 						raiz -> fe = (raiz -> de.Altura()) - (raiz -> iz.Altura());
 						
-						eq = Equilibrar ();
+						Equilibrar ();
 					}
 				}	
 				
@@ -196,11 +192,9 @@ TAVLCom::Insertar (TComplejo &c)
 					
 					if (salida == true)
 					{
-						raiz -> fe++;
-						
 						raiz -> fe = (raiz -> de.Altura()) - (raiz -> iz.Altura());
 						
-						eq = Equilibrar ();
+						Equilibrar ();
 					}
 				}
 			}
@@ -331,11 +325,9 @@ TAVLCom::InordenAux (TListaCom &l)
 	}
 }
 
-bool
+void
 TAVLCom::Equilibrar ()
 {
-	bool salida = false;
-	
 	TAVLNodo *aux = NULL;
 	
 	TAVLNodo *aux2 = NULL;
@@ -355,8 +347,6 @@ TAVLCom::Equilibrar ()
 			raiz -> iz.raiz = aux;
 			
 			aux -> de.raiz = aux2;
-
-			salida = true;
 		}
 		
 		else if (raiz -> de.raiz -> fe == -1)
@@ -376,8 +366,6 @@ TAVLCom::Equilibrar ()
 			raiz -> iz.raiz -> de.raiz = aux3;
 			
 			raiz -> de.raiz -> iz.raiz = aux2;
-			
-			salida = true;
 		}
 	}
 	
@@ -400,8 +388,6 @@ TAVLCom::Equilibrar ()
 			raiz -> iz.raiz -> de.raiz = aux3;
 			
 			raiz -> de.raiz -> iz.raiz = aux2;
-			
-			salida = true;
 		}
 		
 		else if (raiz -> iz.raiz -> fe == -1 || raiz -> iz.raiz -> fe == 0)
@@ -415,12 +401,8 @@ TAVLCom::Equilibrar ()
 			raiz -> de.raiz = aux;
 			
 			aux -> iz.raiz = aux2;
-			
-			salida = true;
 		}
 	}
-	
-	return (salida);
 }
 
 int

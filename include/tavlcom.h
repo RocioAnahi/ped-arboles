@@ -112,7 +112,7 @@ class TAVLCom
 		
 		//!	\brief	Método que realiza el reequilibrado del árbol
 		/*!	Método que realiza el reequilibrado del árbol tanto para la inserción como para el borrado de elementos.*/		
-		bool Equilibrar ();
+		void Equilibrar ();
 		
 		//!	\brief	Método auxiliar del recorrido Inorden
 		/*!	Método auxiliar del recorrido Inorden*/		
