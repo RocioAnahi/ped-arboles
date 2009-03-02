@@ -96,11 +96,11 @@ class TA234Com
 		
 		//!	\brief	Sobrecarga del operador '=='
 		/*!	Sobrecarga del operador '==' para la clase TA234Com*/
-		bool operator== (const TA234Com &) const;
+		bool operator== (const TA234Com &);
 		
 		//!	\brief	Sobrecarga del operador '!='
 		/*!	Sobrecarga del operador '!=' para la clase TA234Com*/
-		bool operator!= (const TA234Com &) const;
+		bool operator!= (const TA234Com &);
 		
 		//!	\brief	Método que indica si un árbol está vacío
 		/*!	Método que indica si un árbol 2-3-4 está vacío*/
@@ -159,6 +159,101 @@ class TA234Com
 		//!	\brief	Puntero a nodo del árbol
 		/*!	Puntero a nodo del árbol*/
 		TA234Nodo *raiz;
+};
+
+//!	\brief	Clase TElemColaA234Com (ta234com.h)
+/*!	Clase que representa cada uno de los nodos de una cola de árboles A234*/
+class TElemColaA234Com
+{
+	//!	\brief	Declaración de amistad con la clase TColaA234Com
+	/*!	Declaración de amistad con la clase TColaA234Com*/
+	friend class TColaA234Com;
+	
+	public:
+	
+		//!	\brief	Constructor por defecto
+		/*!	Constructor por defecto de la clase TElemColaA234Com*/
+		TElemColaA234Com ();
+
+		//!	\brief	Constructor de copia
+		/*!	Constructor de copia de la clase TElemColaA234Com*/
+		TElemColaA234Com (const TElemColaA234Com &);
+		
+		//!	\brief	Destructor
+		/*!	Destructor de la clase TElemColaA234Com*/		
+		~TElemColaA234Com ();
+		
+		//!	\brief	Sobrecarga del operador '='
+		/*!	Sobrecarga del operador '=' para la clase TElemColaA234Com*/		
+		TElemColaA234Com& operator= (const TElemColaA234Com &);
+
+		//!	\brief	Método que devuelve un puntero al árbol contenido en el nodo
+		/*!	Método que devuelve un puntero al árbol contenido en el nodo*/		
+		TA234Com* Arbol ();
+		
+	private:
+	
+		//!	\brief	Puntero al árbol que contiene el nodo
+		/*!	Puntero al árbol que contiene el nodo*/	
+		TA234Com *arbol;
+		
+		//!	\brief	Puntero al siguiente elemento de la cola
+		/*!	Puntero al siguiente elemento de la cola*/		
+		TElemColaA234Com *sig;
+};
+
+
+//!	\brief	Clase TColaA234Com (ta234com.h)
+/*!	Clase que representa un cola de árboles A234 para poder realizar su recorrido por niveles*/
+class TColaA234Com
+{
+	public:
+	
+		//!	\brief	Constructor por defecto
+		/*!	Constructor por defecto de la clase TColaA234Com*/	
+		TColaA234Com ();
+		
+		//!	\brief	Constructor de copia
+		/*!	Constructor de copia de la clase TColaA234Com*/		
+		TColaA234Com (const TColaA234Com &);
+
+		//!	\brief	Destructor
+		/*!	Destructor de la clase TColaA234Com*/	
+		~TColaA234Com ();
+		
+		//!	\brief	Sobrecarga del operador '='
+		/*!	Sobrecarga del operador '=' para la clase TColaA234Com*/		
+		TColaA234Com& operator= (const TColaA234Com &);
+
+		//!	\brief	Método que añade un nuevo elemento a la cola
+		/*!	Método que añade un nuevo elemento a la cola, insertándolo al final de la misma\n
+		 * 		-Entrada: el árbol a encolar\n
+		 * 		-Salida: un booleano\n
+		 * 			--True: ha sido posible encolar el árbol\n
+		 * 			--False: en caso contrario.*/		
+		bool Encolar (TA234Com*);
+		
+		//!	\brief	Método que elimina el primer elemento de la cola
+		/*!	Método que elimina el primer elemento de la cola.*/		
+		bool Desencolar ();
+		
+		//!	\brief	Método que devuelve el primer elemento de la cola
+		/*!	Método que devuelve el primer elemento de la cola*/		
+		TA234Com* Cabeza ();
+		
+		//!	\brief	Método que indica si una cola está vacía
+		/*!	Método que indica si una cola está vacía*/		
+		bool EsVacia ();
+		
+	private:
+		
+		//!	\brief	Puntero al primer elemento de la cola
+		/*!	Puntero al primer elemento de la cola*/		
+		TElemColaA234Com *primero;
+		
+		//!	\brief	Puntero al último elemento de la cola
+		/*!	Puntero al último elemento de la cola*/		
+		TElemColaA234Com *ultimo;
 };
 
 # endif
