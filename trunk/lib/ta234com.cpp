@@ -1,13 +1,14 @@
-#include <iosteam>
+# include <iosteam>
+
 using namespace std;
 
-#include "ta234com.h"
+# include "ta234com.h"
 
 TA234Nodo::TA234Nodo ()
 {
 }
 
-TA234Nodo::TA234Nodo (const TA234Nodo &n):itIz(n.itIz),itDe(n.itDe),itMe(n.itMe),hijoIz(n.hijoIz),hijoMeIz(n.hijoMeIz),hijoMeDe(n.hijoMeDe),hijoDe(n.hijoDe)
+TA234Nodo::TA234Nodo (const TA234Nodo &n): itIz(n.itIz), itDe(n.itDe), itMe(n.itMe), hijoIz(n.hijoIz), hijoMeIz(n.hijoMeIz), hijoMeDe(n.hijoMeDe), hijoDe(n.hijoDe)
 {
 }
 
@@ -18,51 +19,65 @@ TA234Nodo::~TA234Nodo ()
 TA234Nodo&
 TA234Nodo::operator= (const TA234Nodo &n)
 {
-	if (this!=&n)
+	if (this != &n)
 	{
-		itIz=n.itIz;
-		itDe=n.itDe;
-		itMe=n.itMe;
-		hijoIz=n.hijoIz;
-		hijoMeIz=n.hijoMeIz;
-		hijoMeDe=n.hijoMeDe;
-		hijoDe=n.hijoDe;
+		itIz = n.itIz;
+		
+		itDe = n.itDe;
+		
+		itMe = n.itMe;
+		
+		hijoIz = n.hijoIz;
+		
+		hijoMeIz = n.hijoMeIz;
+		
+		hijoMeDe = n.hijoMeDe;
+		
+		hijoDe = n.hijoDe;
 	}
 	
 	return (*this);
 }
 
-TA234Com::TA234Com ():raiz(NULL)
+TA234Com::TA234Com (): raiz(NULL)
 {
 }
 
 TA234Com::TA234Com (const TA234Com &a)
 {
-	if (a.raiz!=NULL)
-		raiz=new TA234Nodo(*(a.raiz));
+	if (a.raiz != NULL)
+	{
+		raiz = new TA234Nodo (*(a.raiz));
+	}
 }
 
 TA234Com::~TA234Com ()
 {
-	if (raiz!=NULL)
+	if (raiz != NULL)
+	{
 		delete raiz;
 		
-	raiz=NULL;
+		raiz = NULL;
+	}
 }
 
 TA234Com&
 TA234Com::operator= (const TA234Com &a)
 {
-	if (this!=&a)
+	if (this != &a)
 	{
-		if (raiz!=NULL)
-		delete raiz;
+		if (raiz != NULL)
+		{
+			delete raiz;
 		
-		raiz=NULL;
+			raiz = NULL;
+		}
 		
 		
-		if (a.raiz!=NULL)
-		raiz=new TA234Nodo(*(a.raiz));
+		if (a.raiz != NULL)
+		{
+			raiz = new TA234Nodo (*(a.raiz));
+		}
 	}
 	
 	return (*this);
@@ -109,22 +124,22 @@ TA234Com::Niveles ()
 			
 			cola.Desencolar ();
 			
-			if (!aux->raiz->hijoIz.EsVacio ())	
+			if (!aux -> raiz -> hijoIz.EsVacio ())	
 			{
 				cola.Encolar (&aux -> raiz -> hijoIz);
 			}
 			
-			if (!aux->raiz->hijoMeIz.EsVacio ())	
+			if (!aux -> raiz -> hijoMeIz.EsVacio ())	
 			{
 				cola.Encolar (&aux -> raiz -> hijoMeIz);
 			}
 			
-			if (!aux->raiz->hijoMeDe.EsVacio ())	
+			if (!aux -> raiz -> hijoMeDe.EsVacio ())	
 			{
 				cola.Encolar (&aux -> raiz -> hijoMeDe);
 			}
 
-			if (!aux->raiz->hijoDe.EsVacio ())	
+			if (!aux -> raiz -> hijoDe.EsVacio ())	
 			{
 				cola.Encolar (&aux -> raiz -> hijoDe);
 			}
@@ -354,5 +369,3 @@ TColaA234Com::EsVacia ()
 {
 	return (primero == NULL);
 }
-
-
