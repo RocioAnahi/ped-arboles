@@ -162,7 +162,7 @@ class TA234Com
 };
 
 //!	\brief	Clase TElemColaA234Com (ta234com.h)
-/*!	Clase que representa cada uno de los nodos de una cola de árboles A234*/
+/*!	Clase que representa cada uno de los nodos de una cola de árboles 2-3-4*/
 class TElemColaA234Com
 {
 	//!	\brief	Declaración de amistad con la clase TColaA234Com
@@ -204,7 +204,7 @@ class TElemColaA234Com
 
 
 //!	\brief	Clase TColaA234Com (ta234com.h)
-/*!	Clase que representa un cola de árboles A234 para poder realizar su recorrido por niveles*/
+/*!	Clase que representa un cola de árboles 2-3-4 para poder realizar su recorrido por niveles*/
 class TColaA234Com
 {
 	public:
