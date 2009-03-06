@@ -8,12 +8,13 @@ TA234Nodo::TA234Nodo ()
 {
 }
 
-TA234Nodo::TA234Nodo (const TA234Nodo &n): itIz(n.itIz), itDe(n.itDe), itMe(n.itMe), hijoIz(n.hijoIz), hijoMeIz(n.hijoMeIz), hijoMeDe(n.hijoMeDe), hijoDe(n.hijoDe)
+TA234Nodo::TA234Nodo (const TA234Nodo &n): tipo_nodo(0), itIz(n.itIz), itDe(n.itDe), itMe(n.itMe), hijoIz(n.hijoIz), hijoMeIz(n.hijoMeIz), hijoMeDe(n.hijoMeDe), hijoDe(n.hijoDe)
 {
 }
 
 TA234Nodo::~TA234Nodo ()
 {
+	tipo_nodo = 0;
 }
 
 TA234Nodo&
@@ -21,6 +22,8 @@ TA234Nodo::operator= (const TA234Nodo &n)
 {
 	if (this != &n)
 	{
+		tipo_nodo = n.tipo_nodo;
+		
 		itIz = n.itIz;
 		
 		itDe = n.itDe;
@@ -101,6 +104,65 @@ TA234Com::Esvacio () const
 	return (raiz == NULL);
 }
 
+TListaCom 
+TAVLCom::Inorden () const
+{
+	TListaCom recorrido;
+	
+	if (!EsVacio())
+	{
+		InordenAux (recorrido);
+	}
+	
+	return (recorrido);
+}
+
+void
+TAVLCom::InordenAux (TListaCom &l)
+{
+	if (!EsVacio())
+	{
+		if (tipo_nodo == 2)
+		{
+			raiz -> hijoIz.InordenAux (l);
+			
+			l.InsFinal (raiz -> itIz);
+			
+			raiz -> hijoMeIz.InordenAux (l);
+		}
+		
+		else if (tipo_nodo == 3)
+		{
+			raiz -> hijoIz.InordenAux (l);
+			
+			l.InsFinal (raiz -> itIz);
+			
+			raiz -> hijoMeIz.InordenAux (l);
+			
+			l.InsFinal (raiz -> itMe);
+			
+			raiz -> hijoMeDe.InordenAux (l);
+		}
+		
+		else if (tipo_nodo == 4)
+		{
+			raiz -> hijoIz.InordenAux (l);
+			
+			l.InsFinal (raiz -> itIz);
+			
+			raiz -> hijoMeIz.InordenAux (l);
+			
+			l.InsFinal (raiz -> itMe);
+			
+			raiz -> hijoMeDe.InordenAux (l);
+			
+			l.InsFinal (raiz -> itDe);
+			
+			raiz -> hijoDe.InordenAux (l);
+		}
+	}
+}
+
 TListaCom
 TA234Com::Niveles ()
 {
@@ -118,9 +180,27 @@ TA234Com::Niveles ()
 		{
 			aux = cola.Cabeza ();
 			
-			//--------------------------------
-			salida.InsFinal (aux -> raiz -> itIz);
-			//--------------------------------
+			if (tipo_nodo == 2)
+			{
+				salida.InsFinal (aux -> raiz -> itIz);
+			}
+			
+			else if (tipo_nodo == 3)
+			{
+				salida.InsFinal (aux -> raiz -> itIz);
+				
+				salida.InsFinal (aux -> raiz -> itMe);
+			}
+			
+			else if (tipo_nodo == 4)
+			{
+				salida.InsFinal (aux -> raiz -> itIz);
+				
+				salida.InsFinal (aux -> raiz -> itMe);
+				
+				salida.InsFinal (aux -> raiz -> itDe);
+			}
+			
 			
 			cola.Desencolar ();
 			

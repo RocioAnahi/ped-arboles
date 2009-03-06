@@ -43,6 +43,8 @@ class TA234Nodo
 	
 	private:
 		
+		int tipo_nodo;
+		
 		//!	\brief	Menor número complejo del nodo
 		/*!	Menor número complejo del nodo*/
 		TComplejo itIz;
@@ -159,6 +161,8 @@ class TA234Com
 		//!	\brief	Puntero a nodo del árbol
 		/*!	Puntero a nodo del árbol*/
 		TA234Nodo *raiz;
+		
+		void InordenAux (TListaCom &);
 };
 
 //!	\brief	Clase TElemColaA234Com (ta234com.h)

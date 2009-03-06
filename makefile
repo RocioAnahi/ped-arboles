@@ -10,7 +10,7 @@ LIBDIR = lib
 
 INCLUDEDIR = include
 
-_OBJ= tcomplejo.o tlistacom.o tavlcom.o
+_OBJ= tcomplejo.o tlistacom.o tavlcom.o ta234com.o
 
 OBJ = $(patsubst %,$(LIBDIR)/%,$(_OBJ))
 
