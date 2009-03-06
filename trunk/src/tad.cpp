@@ -1,12 +1,16 @@
-#include <iostream>
+# include <iostream>
+
 using namespace std;
 
-#include "tavlcom.h"
+# include "tavlcom.h"
 
 int main ()
 {	
+	# ifdef _MAIN_
+	
 	TComplejo c1 (5,5), c2 (90,90), c3 (83,83), c4 (28,28), c5 (67,67),
 	c6 (81,81), c7 (50,50), c8 (43,43), c9 (55,55), c10(45,45),c_inventao(69,69);
+	
 	TAVLCom a;
 	
 	a.Insertar (c1);
@@ -42,4 +46,7 @@ int main ()
 	
 	if (!a.Buscar (c_inventao))	cout << "No encuentra el inventao" << endl;
 
+	# else
+	
+	# endif
 }
