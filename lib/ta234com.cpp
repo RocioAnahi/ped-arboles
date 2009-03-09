@@ -1,4 +1,4 @@
-# include <iosteam>
+# include <iostream>
 
 using namespace std;
 
@@ -86,26 +86,26 @@ TA234Com::operator= (const TA234Com &a)
 	return (*this);
 }
 
-/*bool
-TA234Com::operator== (const TA234Com &a)
+bool
+TA234Com::operator== (TA234Com &a)
 {
-	return (Niveles == a.Niveles && Inorden() == a.Inorden());
-}*/
-
-/*bool
-TA234Com::operator!= (const TA234Com &a)
-{
-	return (Niveles != a.Niveles || Inorden() != a.Inorden());
-}*/
+	return (Niveles() == a.Niveles() && Inorden() == a.Inorden());
+}
 
 bool
-TA234Com::Esvacio () const
+TA234Com::operator!= (TA234Com &a)
+{
+	return (Niveles() != a.Niveles() || Inorden() != a.Inorden());
+}
+
+bool
+TA234Com::EsVacio () const
 {
 	return (raiz == NULL);
 }
 
 TListaCom 
-TAVLCom::Inorden () const
+TA234Com::Inorden () const
 {
 	TListaCom recorrido;
 	
@@ -118,11 +118,11 @@ TAVLCom::Inorden () const
 }
 
 void
-TAVLCom::InordenAux (TListaCom &l)
+TA234Com::InordenAux (TListaCom &l) const
 {
 	if (!EsVacio())
 	{
-		if (tipo_nodo == 2)
+		if (raiz->tipo_nodo == 2)
 		{
 			raiz -> hijoIz.InordenAux (l);
 			
@@ -131,7 +131,7 @@ TAVLCom::InordenAux (TListaCom &l)
 			raiz -> hijoMeIz.InordenAux (l);
 		}
 		
-		else if (tipo_nodo == 3)
+		else if (raiz->tipo_nodo == 3)
 		{
 			raiz -> hijoIz.InordenAux (l);
 			
@@ -144,7 +144,7 @@ TAVLCom::InordenAux (TListaCom &l)
 			raiz -> hijoMeDe.InordenAux (l);
 		}
 		
-		else if (tipo_nodo == 4)
+		else if (raiz->tipo_nodo == 4)
 		{
 			raiz -> hijoIz.InordenAux (l);
 			
@@ -180,19 +180,19 @@ TA234Com::Niveles ()
 		{
 			aux = cola.Cabeza ();
 			
-			if (tipo_nodo == 2)
+			if (raiz->tipo_nodo == 2)
 			{
 				salida.InsFinal (aux -> raiz -> itIz);
 			}
 			
-			else if (tipo_nodo == 3)
+			else if (raiz->tipo_nodo == 3)
 			{
 				salida.InsFinal (aux -> raiz -> itIz);
 				
 				salida.InsFinal (aux -> raiz -> itMe);
 			}
 			
-			else if (tipo_nodo == 4)
+			else if (raiz->tipo_nodo == 4)
 			{
 				salida.InsFinal (aux -> raiz -> itIz);
 				
@@ -229,13 +229,84 @@ TA234Com::Niveles ()
 	return (salida);
 }
 
+bool
+TA234Com::Insertar (TComplejo &c)
+{
+	bool salida;
+	
+	
+	return (salida);	
+}
+
+bool
+TA234Com::EsHoja ()
+{
+	return (raiz->hijoIz.raiz==NULL && raiz->hijoMeIz.raiz==NULL && raiz->hijoMeDe.raiz==NULL && raiz->hijoDe.raiz==NULL);
+}
 
 
-
-
-
-
-
+int
+TA234Com::Comparar (TComplejo &c)
+{
+	if (raiz->tipo_nodo == 1)
+	{
+		if (c.Comparar(raiz->itIz))
+		{
+			return 1;
+		}
+		
+		else
+		{
+			return 2; 
+		}
+	}
+	
+	else if (raiz->tipo_nodo == 2)
+	{
+		if (c.Comparar(raiz->itIz))
+		{
+			return 1; 
+		}
+		
+		else if (c.Comparar (raiz->itMe))
+		{
+			return 2; 
+		}
+		
+		else
+		{
+			return 3; 
+		}
+		
+	}
+	
+	else if (raiz->tipo_nodo == 3)
+	{
+		if (c.Comparar(raiz->itIz))
+		{
+			return 1; 
+		}
+		
+		else if (c.Comparar (raiz->itMe))
+		{
+			return 2; 
+		}
+		
+		else if (c.Comparar (raiz->itDe))
+		{
+			return 3; 
+		}
+		
+		else
+		{
+			return 4;
+		}
+	}
+	else
+	{
+		return 0;
+	}
+}
 
 TElemColaA234Com::TElemColaA234Com (): arbol(NULL), sig(NULL)
 {
@@ -449,3 +520,4 @@ TColaA234Com::EsVacia ()
 {
 	return (primero == NULL);
 }
+
