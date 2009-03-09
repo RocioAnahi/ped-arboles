@@ -136,6 +136,8 @@ class TComplejo
 		 * 		-Salida: un número real*/
 		double Mod (void)	const;
 		
+		bool Comparar (TComplejo &);
+		
 	private:
 	
 		//! \brief	Parte real

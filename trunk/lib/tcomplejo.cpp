@@ -233,3 +233,37 @@ ostream& operator<< (ostream &os, const TComplejo &complejo)
 	return (os);
 }
 
+bool
+TComplejo::Comparar (TComplejo &c)	//true: izquierda -- false: derecha
+{
+	if (this->Mod() < c.Mod())
+	{
+		return true;
+	}
+	else if (this->Mod() > c.Mod())
+	{
+		return false;
+	}
+	else
+	{
+		if (this->Re() > c.Re())
+		{
+			return false;
+		}
+		else if (this->Re () < c.Re())
+		{
+			return true;
+		}
+		else
+		{
+			if (this->Im() > c.Im())
+			{
+				return false;
+			}
+			else if (this->Im () < c.Im())
+			{
+				return true;
+			}
+		}
+	}
+}
