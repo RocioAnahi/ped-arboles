@@ -232,10 +232,108 @@ TA234Com::Niveles ()
 bool
 TA234Com::Insertar (TComplejo &c)
 {
-	bool salida;
+	bool salida=false;
 	
+	if (raiz!=NULL)
+	{
+		if (raiz->tipo_nodo==3)
+		{
+			DivideRaiz();
+		}
+		else
+		{
+			TA234Com *aux=raiz;
+			TA234Com *aux2;
+			
+			while (true)
+			{
+				
+				if (!aux->EsHoja ())
+				{
+					switch (aux->Comparar (c))
+					{
+						case 0:
+							return false;
+						
+						case 1:
+							aux2=&aux->hijoIz;	
+							if (aux->hijoIz.raiz->tipo_nodo==3)	aux->DivideHijo ();
+							aux=aux2;
+							
+						case 2:
+							aux2=&aux->hijoMeIz;	
+							if (aux->hijoMeIz.raiz->tipo_nodo==3)	aux->DivideHijo ();
+							aux=aux2;
+						case 3:
+							aux2=&aux->hijoMeDe;	
+							if (aux->hijoMeDe.raiz->tipo_nodo==3)	aux->DivideHijo ();
+							aux=aux2;
+						//~ case 4:
+							//~ if (aux->hijoDe.raiz->tipo_nodo==3)	aux->DivideHijo ();
+					}
+				}
+				else
+				{
+					return (aux->InsertarAux (c));
+				}
+			}
+		}
+	}
+	else
+	{
+		raiz=new TA234Nodo;
+		
+		raiz->itIz=c;
+		raiz->tipo_nodo=1;
+	}
 	
 	return (salida);	
+}
+
+bool
+TA234Com::InsertarAux (TComplejo &c)
+{
+	switch (raiz->Comparar (c))
+	{
+		case 0:
+			return false;
+		
+		case 1:	
+			if (raiz->tipo_nodo==1)
+			{
+				raiz->itMe=raiz->itIz;
+				raiz->itIz=c;
+			}
+			else if (raiz->tipo_nodo==2)
+			{
+				raiz->itDe=raiz->itMe;
+				raiz->itMe=raiz->itIz;
+				raiz->itIz=c;
+			}
+			raiz->tipo_nodo++;
+			
+			return true;
+		case 2:
+			if (raiz->tipo_nodo==1)
+			{
+				raiz->itMe=c;
+			}
+			else if (raiz->tipo_nodo==2)
+			{
+				raiz->itDe=raiz->itMe;
+				raiz->itMe=c;
+			}
+			raiz->tipo_nodo++;
+			
+			return true;
+		case 3:
+			raiz->itDe=c;
+			raiz->tipo_nodo++;
+			
+			return true;
+		//~ case 4:
+			
+	}
 }
 
 bool
@@ -250,7 +348,11 @@ TA234Com::Comparar (TComplejo &c)
 {
 	if (raiz->tipo_nodo == 1)
 	{
-		if (c.Comparar(raiz->itIz))
+		if (c==raiz->itIz)
+		{
+			return 0;
+		}
+		else if (c.Comparar(raiz->itIz))
 		{
 			return 1;
 		}
@@ -263,7 +365,12 @@ TA234Com::Comparar (TComplejo &c)
 	
 	else if (raiz->tipo_nodo == 2)
 	{
-		if (c.Comparar(raiz->itIz))
+		if (c == raiz->itIz || c == raiz->itMe)
+		{
+			return 0;
+		}
+		
+		else if (c.Comparar(raiz->itIz))
 		{
 			return 1; 
 		}
@@ -282,7 +389,11 @@ TA234Com::Comparar (TComplejo &c)
 	
 	else if (raiz->tipo_nodo == 3)
 	{
-		if (c.Comparar(raiz->itIz))
+		if (c == raiz->itIz || c == raiz->itMe || c == raiz->itDe)
+		{
+			return 0;
+		}
+		else if (c.Comparar(raiz->itIz))
 		{
 			return 1; 
 		}
@@ -304,7 +415,7 @@ TA234Com::Comparar (TComplejo &c)
 	}
 	else
 	{
-		return 0;
+		return -1;
 	}
 }
 
