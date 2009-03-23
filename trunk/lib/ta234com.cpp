@@ -229,108 +229,231 @@ TA234Com::Niveles ()
 	return (salida);
 }
 
+//~ bool
+//~ TA234Com::Insertar (TComplejo &c)
+//~ {
+	//~ bool salida=false;
+	//~ 
+	//~ if (raiz!=NULL)
+	//~ {
+		//~ if (raiz->tipo_nodo==3)
+		//~ {
+			//~ DivideRaiz();
+		//~ }
+		//~ else
+		//~ {
+			//~ TA234Nodo *aux=raiz;
+			//~ TA234Nodo *aux2;
+			//~ 
+			//~ while (true)
+			//~ {
+				//~ 
+				//~ if (!aux->EsHoja ())
+				//~ {
+					//~ switch (aux->Comparar (c))
+					//~ {
+						//~ case 0:
+							//~ return false;
+						//~ 
+						//~ case 1:
+							//~ aux2=&aux->hijoIz;	
+							//~ if (aux->hijoIz.raiz->tipo_nodo==3)	aux->DivideHijo ();
+							//~ aux=aux2;
+							//~ 
+						//~ case 2:
+							//~ aux2=&aux->hijoMeIz;	
+							//~ if (aux->hijoMeIz.raiz->tipo_nodo==3)	aux->DivideHijo ();
+							//~ aux=aux2;
+						//~ case 3:
+							//~ aux2=&aux->hijoMeDe;	
+							//~ if (aux->hijoMeDe.raiz->tipo_nodo==3)	aux->DivideHijo ();
+							//~ aux=aux2;
+						//~ case 4:
+							//~ if (aux->hijoDe.raiz->tipo_nodo==3)	aux->DivideHijo ();
+					//~ }
+				//~ }
+				//~ else
+				//~ {
+					//~ return (aux->InsertarAux (c));
+				//~ }
+			//~ }
+		//~ }
+	//~ }
+	//~ else
+	//~ {
+		//~ raiz=new TA234Nodo;
+		//~ 
+		//~ raiz->itIz=c;
+		//~ raiz->tipo_nodo=1;
+	//~ }
+	//~ 
+	//~ return (salida);	
+//~ }
+
+
 bool
 TA234Com::Insertar (TComplejo &c)
 {
-	bool salida=false;
+	//p es el hijo
+	//q es el padre;
+	TA234Nodo *p;
+	TA234Nodo *q;
+	bool noencontrado,salida;
 	
-	if (raiz!=NULL)
+	p=raiz;
+	q=p;
+	
+	if (EsVacio ())
 	{
-		if (raiz->tipo_nodo==3)
-		{
-			DivideRaiz();
-		}
-		else
-		{
-			TA234Com *aux=raiz;
-			TA234Com *aux2;
-			
-			while (true)
-			{
-				
-				if (!aux->EsHoja ())
-				{
-					switch (aux->Comparar (c))
-					{
-						case 0:
-							return false;
-						
-						case 1:
-							aux2=&aux->hijoIz;	
-							if (aux->hijoIz.raiz->tipo_nodo==3)	aux->DivideHijo ();
-							aux=aux2;
-							
-						case 2:
-							aux2=&aux->hijoMeIz;	
-							if (aux->hijoMeIz.raiz->tipo_nodo==3)	aux->DivideHijo ();
-							aux=aux2;
-						case 3:
-							aux2=&aux->hijoMeDe;	
-							if (aux->hijoMeDe.raiz->tipo_nodo==3)	aux->DivideHijo ();
-							aux=aux2;
-						//~ case 4:
-							//~ if (aux->hijoDe.raiz->tipo_nodo==3)	aux->DivideHijo ();
-					}
-				}
-				else
-				{
-					return (aux->InsertarAux (c));
-				}
-			}
-		}
+		raiz=new TA234Nodo;
+		raiz->tipo_nodo=1;
+		raiz->itIz=c;
 	}
 	else
 	{
-		raiz=new TA234Nodo;
-		
-		raiz->itIz=c;
-		raiz->tipo_nodo=1;
+		if (p->tipo_nodo==3)
+		{
+			p->DivideRaiz(*this);
+		}
+		noencontrado=true;
+		switch (raiz->Comparar (c))
+		{
+			case 0:
+				salida=false;
+				noencontrado=false;
+				break;
+			case 1:
+				p=raiz->hijoIz.raiz;
+				break;
+			case 2:
+				p=raiz->hijoMeIz.raiz;
+				break;
+			case 3:
+				p=raiz->hijoMeDe.raiz;
+				break;
+			case 4:
+				p=raiz->hijoDe.raiz;
+				break;
+			//es una hoja
+			case 5:
+				raiz->InsertarAux (c);
+				noencontrado=false;
+				salida=true;
+		}
+		while (noencontrado)
+		{
+			if (p->tipo_nodo==3)
+			{
+				if (q->tipo_nodo==1)
+				{
+					//~ q->DivideHijoDe2 (p);
+				}
+				else
+				{
+					//~ q->DivideHijoDe3 (p);
+				}
+			}
+			switch (p->Comparar (c))
+			{
+				case 0:
+					noencontrado=false;
+					salida=false;
+					break;
+				case 1:
+					q=p;
+					p=p->hijoIz.raiz;
+					break;
+				case 2:
+					q=p;
+					p=p->hijoMeIz.raiz;
+					break;
+				case 3:
+					q=p;
+					p=p->hijoMeDe.raiz;
+					break;
+				case 4:
+					q=p;
+					p=p->hijoDe.raiz;
+					break;
+				case 5:
+					p->InsertarAux (c);
+					salida=true;
+					noencontrado=false;
+					break;
+			}
+		}
 	}
 	
-	return (salida);	
+	return salida;
 }
 
-bool
-TA234Com::InsertarAux (TComplejo &c)
+void
+TA234Nodo::DivideRaiz (TA234Com &a)
 {
-	switch (raiz->Comparar (c))
-	{
-		case 0:
-			return false;
-		
+	TA234Com aux;
+	
+	aux.raiz=new TA234Nodo;
+	
+	aux.raiz->hijoIz.raiz=new TA234Nodo;
+	
+	aux.raiz->hijoIz.raiz->itIz=itIz;
+	
+	aux.raiz->hijoMeIz.raiz=new TA234Nodo;
+	
+	aux.raiz->hijoMeIz.raiz->itIz=itDe;
+	
+	aux.raiz->itIz=itMe;
+	
+	aux.raiz->hijoIz.raiz->hijoIz=hijoIz;
+	aux.raiz->hijoIz.raiz->hijoMeIz=hijoMeIz;
+	aux.raiz->hijoMeIz.raiz->hijoIz=hijoMeDe;
+	aux.raiz->hijoMeIz.raiz->hijoMeIz=hijoDe;
+	
+	aux.raiz->tipo_nodo=1;
+	aux.raiz->hijoIz.raiz->tipo_nodo=1;
+	aux.raiz->hijoMeIz.raiz->tipo_nodo=1;
+	
+	a=aux;
+}
+
+void
+TA234Nodo::InsertarAux (TComplejo &c)
+{
+	switch (Comparar (c))
+	{	
 		case 1:	
-			if (raiz->tipo_nodo==1)
+			if (tipo_nodo==1)
 			{
-				raiz->itMe=raiz->itIz;
-				raiz->itIz=c;
+				itMe=itIz;
+				itIz=c;
 			}
-			else if (raiz->tipo_nodo==2)
+			else if (tipo_nodo==2)
 			{
-				raiz->itDe=raiz->itMe;
-				raiz->itMe=raiz->itIz;
-				raiz->itIz=c;
+				itDe=itMe;
+				itMe=itIz;
+				itIz=c;
 			}
-			raiz->tipo_nodo++;
+			tipo_nodo++;
+			break;
 			
-			return true;
 		case 2:
-			if (raiz->tipo_nodo==1)
+			if (tipo_nodo==1)
 			{
-				raiz->itMe=c;
+				itMe=c;
 			}
-			else if (raiz->tipo_nodo==2)
+			else if (tipo_nodo==2)
 			{
-				raiz->itDe=raiz->itMe;
-				raiz->itMe=c;
+				itDe=itMe;
+				itMe=c;
 			}
-			raiz->tipo_nodo++;
+			tipo_nodo++;
+			break;
 			
-			return true;
 		case 3:
-			raiz->itDe=c;
-			raiz->tipo_nodo++;
+			itDe=c;
+			tipo_nodo++;
+			break;
 			
-			return true;
 		//~ case 4:
 			
 	}
@@ -344,15 +467,15 @@ TA234Com::EsHoja ()
 
 
 int
-TA234Com::Comparar (TComplejo &c)
+TA234Nodo::Comparar (TComplejo &c)
 {
-	if (raiz->tipo_nodo == 1)
+	if (tipo_nodo == 1 && hijoIz.raiz!=NULL && hijoMeIz.raiz!=NULL)
 	{
-		if (c==raiz->itIz)
+		if (c==itIz)
 		{
 			return 0;
 		}
-		else if (c.Comparar(raiz->itIz))
+		else if (c.Comparar(itIz))
 		{
 			return 1;
 		}
@@ -363,19 +486,19 @@ TA234Com::Comparar (TComplejo &c)
 		}
 	}
 	
-	else if (raiz->tipo_nodo == 2)
+	else if (tipo_nodo == 2 && hijoIz.raiz!=NULL && hijoMeIz.raiz!=NULL && hijoMeDe.raiz!=NULL)
 	{
-		if (c == raiz->itIz || c == raiz->itMe)
+		if (c == itIz || c == itMe)
 		{
 			return 0;
 		}
 		
-		else if (c.Comparar(raiz->itIz))
+		else if (c.Comparar(itIz))
 		{
 			return 1; 
 		}
 		
-		else if (c.Comparar (raiz->itMe))
+		else if (c.Comparar (itMe))
 		{
 			return 2; 
 		}
@@ -387,23 +510,23 @@ TA234Com::Comparar (TComplejo &c)
 		
 	}
 	
-	else if (raiz->tipo_nodo == 3)
+	else if (tipo_nodo == 3 && hijoIz.raiz!=NULL && hijoMeIz.raiz!=NULL && hijoMeDe.raiz!=NULL && hijoDe.raiz!=NULL)
 	{
-		if (c == raiz->itIz || c == raiz->itMe || c == raiz->itDe)
+		if (c == itIz || c == itMe || c == itDe)
 		{
 			return 0;
 		}
-		else if (c.Comparar(raiz->itIz))
+		else if (c.Comparar(itIz))
 		{
 			return 1; 
 		}
 		
-		else if (c.Comparar (raiz->itMe))
+		else if (c.Comparar (itMe))
 		{
 			return 2; 
 		}
 		
-		else if (c.Comparar (raiz->itDe))
+		else if (c.Comparar (itDe))
 		{
 			return 3; 
 		}
@@ -415,7 +538,7 @@ TA234Com::Comparar (TComplejo &c)
 	}
 	else
 	{
-		return -1;
+		return 5;
 	}
 }
 
