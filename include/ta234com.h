@@ -24,6 +24,8 @@ class TA234Nodo;
 /*!	Clase que representa un árbol 2-3-4 cuyos ítems son números complejos*/
 class TA234Com
 {
+	friend class TA234Nodo;
+	
 	public:
 		
 		//!	\brief	Constructor por defecto
@@ -112,8 +114,6 @@ class TA234Com
 		
 		void InordenAux (TListaCom &)	const;
 		
-		int Comparar (TComplejo &c);
-		
 		bool EsHoja ();
 };
 
@@ -172,6 +172,12 @@ class TA234Nodo
 		//!	\brief	Subárbol derecho
 		/*!	Subárbol o rama derecha del árbol*/
 		TA234Com hijoDe;
+		
+		int Comparar (TComplejo &);
+		
+		void InsertarAux (TComplejo &);
+		
+		void DivideRaiz (TA234Com &);	
 };
 
 

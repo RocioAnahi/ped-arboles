@@ -3,6 +3,7 @@
 using namespace std;
 
 # include "tavlcom.h"
+# include "ta234com.h"
 
 int main ()
 {	
@@ -47,6 +48,15 @@ int main ()
 	if (!a.Buscar (c_inventao))	cout << "No encuentra el inventao" << endl;
 
 	# else
+	
+	TComplejo c1 (5,5), c2 (90,90), c3 (83,83), c4 (28,28);
+	
+	TA234Com a;
+	
+	a.Insertar (c1);
+	if (a.Insertar (c2))	cout << "bien" << endl;
+	
+	cout << a.Niveles () << endl;
 	
 	# endif
 }
