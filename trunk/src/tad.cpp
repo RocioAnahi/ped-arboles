@@ -54,9 +54,11 @@ int main ()
 	TA234Com a;
 	
 	a.Insertar (c1);
-	if (a.Insertar (c2))	cout << "bien" << endl;
+	a.Insertar (c2);
+	a.Insertar (c3);
+	a.Insertar (c4);
 	
-	cout << a.Niveles () << endl;
+	//~ cout << a.Niveles () << endl;
 	
 	# endif
 }

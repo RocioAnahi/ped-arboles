@@ -409,54 +409,49 @@ TA234Nodo::DivideRaiz (TA234Com &a)
 	aux.raiz->hijoMeIz.raiz->hijoIz=hijoMeDe;
 	aux.raiz->hijoMeIz.raiz->hijoMeIz=hijoDe;
 	
-	aux.raiz->tipo_nodo=1;
-	aux.raiz->hijoIz.raiz->tipo_nodo=1;
-	aux.raiz->hijoMeIz.raiz->tipo_nodo=1;
-	
 	a=aux;
+	
+	a.raiz->tipo_nodo=1;
+	a.raiz->hijoIz.raiz->tipo_nodo=1;
+	a.raiz->hijoMeIz.raiz->tipo_nodo=1;
 }
 
 void
 TA234Nodo::InsertarAux (TComplejo &c)
 {
-	switch (Comparar (c))
-	{	
-		case 1:	
-			if (tipo_nodo==1)
-			{
-				itMe=itIz;
-				itIz=c;
-			}
-			else if (tipo_nodo==2)
-			{
-				itDe=itMe;
-				itMe=itIz;
-				itIz=c;
-			}
-			tipo_nodo++;
-			break;
-			
-		case 2:
-			if (tipo_nodo==1)
-			{
-				itMe=c;
-			}
-			else if (tipo_nodo==2)
-			{
-				itDe=itMe;
-				itMe=c;
-			}
-			tipo_nodo++;
-			break;
-			
-		case 3:
-			itDe=c;
-			tipo_nodo++;
-			break;
-			
-		//~ case 4:
-			
+	if (tipo_nodo==1)
+	{
+		if (c.Comparar (itIz))
+		{
+			itDe=itMe;
+			itMe=itIz;
+			itIz=c;
+		}
+		else
+		{
+			itDe=itMe;
+			itMe=c;
+		}
 	}
+	else if (tipo_nodo==2)
+	{
+		if (c.Comparar (itIz))
+		{
+			itDe=itMe;
+			itMe=itIz;
+			itIz=c;
+		}
+		else if (c.Comparar (itMe))
+		{
+			itDe=itMe;
+			itMe=c;
+		}
+		else
+		{
+			itDe=c;
+		}
+	}
+	tipo_nodo++;
 }
 
 bool
