@@ -58,7 +58,7 @@ int main ()
 	a.Insertar (c3);
 	a.Insertar (c4);
 	
-	//~ cout << a.Niveles () << endl;
+	cout << a.Niveles () << endl;
 	
 	# endif
 }

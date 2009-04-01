@@ -115,6 +115,8 @@ class TA234Com
 		void InordenAux (TListaCom &)	const;
 		
 		bool EsHoja ();
+		
+		void DivideRaiz (TA234Nodo *);
 };
 
 //!	\brief	Clase TA234Nodo (ta234com.h)
@@ -176,8 +178,6 @@ class TA234Nodo
 		int Comparar (TComplejo &);
 		
 		void InsertarAux (TComplejo &);
-		
-		void DivideRaiz (TA234Com &);	
 };
 
 
