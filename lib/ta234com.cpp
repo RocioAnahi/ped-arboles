@@ -313,7 +313,7 @@ TA234Com::Insertar (TComplejo &c)
 	{
 		if (p->tipo_nodo==3)
 		{
-			p->DivideRaiz(*this);
+			DivideRaiz(p);
 		}
 		noencontrado=true;
 		switch (raiz->Comparar (c))
@@ -388,32 +388,37 @@ TA234Com::Insertar (TComplejo &c)
 }
 
 void
-TA234Nodo::DivideRaiz (TA234Com &a)
-{
-	TA234Com aux;
+TA234Com::DivideRaiz (TA234Nodo *a)
+{	
+	raiz=new TA234Nodo;
 	
-	aux.raiz=new TA234Nodo;
+	raiz->hijoIz.raiz=new TA234Nodo;
 	
-	aux.raiz->hijoIz.raiz=new TA234Nodo;
+	raiz->hijoIz.raiz->itIz=a->itIz;
 	
-	aux.raiz->hijoIz.raiz->itIz=itIz;
+	raiz->hijoMeIz.raiz=new TA234Nodo;
 	
-	aux.raiz->hijoMeIz.raiz=new TA234Nodo;
+	raiz->hijoMeIz.raiz->itIz=a->itDe;
 	
-	aux.raiz->hijoMeIz.raiz->itIz=itDe;
+	raiz->itIz=a->itMe;
 	
-	aux.raiz->itIz=itMe;
+	raiz->hijoIz.raiz->hijoIz=a->hijoIz;
+	raiz->hijoIz.raiz->hijoMeIz=a->hijoMeIz;
+	raiz->hijoMeIz.raiz->hijoIz=a->hijoMeDe;
+	raiz->hijoMeIz.raiz->hijoMeIz=a->hijoDe;
 	
-	aux.raiz->hijoIz.raiz->hijoIz=hijoIz;
-	aux.raiz->hijoIz.raiz->hijoMeIz=hijoMeIz;
-	aux.raiz->hijoMeIz.raiz->hijoIz=hijoMeDe;
-	aux.raiz->hijoMeIz.raiz->hijoMeIz=hijoDe;
+	a->hijoIz.raiz=NULL;
+	a->hijoMeIz.raiz=NULL;
+	a->hijoMeDe.raiz=NULL;
+	a->hijoDe.raiz=NULL;
 	
-	a=aux;
+	delete a;
 	
-	a.raiz->tipo_nodo=1;
-	a.raiz->hijoIz.raiz->tipo_nodo=1;
-	a.raiz->hijoMeIz.raiz->tipo_nodo=1;
+	a=raiz;
+	
+	raiz->tipo_nodo=1;
+	raiz->hijoIz.raiz->tipo_nodo=1;
+	raiz->hijoMeIz.raiz->tipo_nodo=1;
 }
 
 void
