@@ -151,13 +151,13 @@ class TA234Nodo
 		/*!	Menor número complejo del nodo*/
 		TComplejo itIz;
 		
-		//!	\brief	Mayor número complejo del nodo
-		/*!	Mayor número complejo del nodo*/
-		TComplejo itDe;
-		
 		//!	\brief	Número complejo medio del nodo
 		/*!	Número complejo medio del nodo*/
 		TComplejo itMe;
+		
+		//!	\brief	Mayor número complejo del nodo
+		/*!	Mayor número complejo del nodo*/
+		TComplejo itDe;	
 		
 		//!	\brief	Subárbol izquierdo
 		/*!	Subárbol o rama izquierda del árbol*/
