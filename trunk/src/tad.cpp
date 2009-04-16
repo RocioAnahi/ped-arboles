@@ -49,8 +49,8 @@ int main ()
 
 	# else
 	
-	TComplejo c1 (5,5), c2 (90,90), c3 (83,83), c4 (28,28), c5 (40,40), c6 (84,84), c7 (88,88), 
-	c8 (99,99), c9 (110,110), c10 (86,86), c11(85,85), c12(20,20), c14(100,100);
+	TComplejo c1 (5,5), c2 (80,80), c3 (73,73), c4 (18,18), c5 (30,30), c6 (74,74), c7 (78,78), 
+	c8 (89,89), c9 (99,99), c10 (76,76), c11(75,75), c12(10,10), c14(90,90);
 	
 	TA234Com a;
 	
@@ -65,10 +65,10 @@ int main ()
 	a.Insertar (c9);
 	a.Insertar (c10);
 	a.Insertar (c11);
-	//~ a.Insertar (c12);
-	a.Insertar (c14);
 	a.Insertar (c12);
-	
+	a.Insertar (c14);
+	//~ a.Insertar (c12);
+	//~ 
 	cout << a.Inorden () << endl<< endl;
 	cout << a.Niveles () << endl;
 	
