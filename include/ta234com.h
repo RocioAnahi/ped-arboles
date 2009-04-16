@@ -24,6 +24,8 @@ class TA234Nodo;
 /*!	Clase que representa un árbol 2-3-4 cuyos ítems son números complejos*/
 class TA234Com
 {
+	//!	\brief	Declaración de amistad con la clase TA234Nodo
+	/*!	Declaración de amistad con la clase TA234Nodo*/
 	friend class TA234Nodo;
 	
 	public:
@@ -72,7 +74,7 @@ class TA234Com
 		 * 		-Salida: un booleano\n
 		 * 			--True: el complejo está en el árbol\n
 		 * 			--False: en caso contrario.*/
-		bool Buscar (const TComplejo &)	const;
+		bool Buscar (TComplejo &)	const;
 		
 		//!	\brief	Método que indica la altura del árbol
 		/*!	Método que indica la altura del árbol*/
@@ -103,19 +105,23 @@ class TA234Com
 		 * 			--True: se ha podido borrar el elemento\n
 		 * 			--False: en caso contrario.*/
 		bool Borrar (const TComplejo &);
-		
-	
-			
+
 	private:
 		
 		//!	\brief	Puntero a nodo del árbol
 		/*!	Puntero a nodo del árbol*/
 		TA234Nodo *raiz;
 		
+		//!	\brief	Método auxiliar para la realización del recorrido Inorden
+		/*!	Método auxiliar para la realización del recorrido Inorden*/
 		void InordenAux (TListaCom &)	const;
 		
-		bool EsHoja ();
+		//!	\brief	Método que indica si un nodo es un hoja
+		/*!	Método que indica si un nodo es una hoja*/
+		bool EsHoja () const;
 		
+		//!	\brief	Método que divide la raíz
+		/*!	Método que divide la raíz en nodos nuevos en caso de que ésta sea un 4-nodo*/
 		void DivideRaiz (TA234Nodo *, TA234Nodo*);
 		
 };
@@ -124,6 +130,8 @@ class TA234Com
 /*!	Clase que representa cada uno de los nodos que componen un árbol 2-3-4*/
 class TA234Nodo
 {
+	//!	\brief	Declaración de amistad con la clase TA234Com
+	/*!	Declaración de amistad con la clase TA234Com*/
 	friend class TA234Com;
 	
 	public:
@@ -146,6 +154,8 @@ class TA234Nodo
 	
 	private:
 		
+		//!	\brief	Número que indica el grado de un nodo
+		/*!	Método que indica el grado de un nodo*/
 		int tipo_nodo;
 		
 		//!	\brief	Menor número complejo del nodo
@@ -176,18 +186,23 @@ class TA234Nodo
 		/*!	Subárbol o rama derecha del árbol*/
 		TA234Com hijoDe;
 		
+		//!	\brief	Método que indica lo que hacer con el complejo a insertar
+		/*!	Método que indica lo que debe hacer con el complejo a insertar
+		 * 	en función del entero devuelto.*/
 		int Comparar (TComplejo &);
 		
-		void InsertarAux (TComplejo &);
+		//!	\brief	Método auxiliar de la inserción
+		/*!	Método auxiliar de la inserción en un árbol 2-3-4*/
+		bool InsertarAux (TComplejo &);
 		
+		//!	\brief	Método que divide un 4-nodo
+		/*!	Método que divide un 4-nodo cuyo padre es un 2-nodo*/
 		void DivideHijoDe2 (TA234Nodo*);
 		
+		//!	\brief	Método que divide un 4-nodo
+		/*!	Método que divide un 4-nodo cuyo padre es un 3-nodo*/
 		void DivideHijoDe3 (TA234Nodo*);
-		
-		//~ TA234Nodo* DivideRaiz ();
 };
-
-
 
 //!	\brief	Clase TElemColaA234Com (ta234com.h)
 /*!	Clase que representa cada uno de los nodos de una cola de árboles 2-3-4*/
@@ -229,7 +244,6 @@ class TElemColaA234Com
 		/*!	Puntero al siguiente elemento de la cola*/		
 		TElemColaA234Com *sig;
 };
-
 
 //!	\brief	Clase TColaA234Com (ta234com.h)
 /*!	Clase que representa un cola de árboles 2-3-4 para poder realizar su recorrido por niveles*/
