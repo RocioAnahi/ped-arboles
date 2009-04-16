@@ -391,6 +391,16 @@ TA234Com::Insertar (TComplejo &c)
 					{
 						p = q -> hijoMeIz.raiz;
 					}
+					
+					if (!c.Comparar(q->itMe))
+					{
+						p = q -> hijoMeDe.raiz;
+					}
+					
+					if (!c.Comparar(q->itDe))
+					{
+						p = q -> hijoDe.raiz;
+					}
 				}
 			}
 			
@@ -553,6 +563,68 @@ TA234Nodo::DivideHijoDe3 (TA234Nodo* p)
 		p -> tipo_nodo = 1;
 		
 		p -> hijoMeDe.raiz = p -> hijoDe.raiz = NULL;
+	}
+	
+	else if (p == hijoMeIz.raiz)
+	{
+		aux = p -> itIz;
+		
+		aux2 = p -> itDe;
+		
+		hijoDe.raiz = hijoMeDe.raiz;
+		
+		itDe = itMe;
+		
+		tipo_nodo++;
+		
+		itMe = hijoMeIz.raiz -> itMe;
+		
+		hijoMeDe.raiz = new TA234Nodo;
+		
+		hijoMeDe.raiz -> tipo_nodo = 1;
+		
+		hijoMeIz.raiz -> tipo_nodo = 1;
+		
+		hijoMeDe.raiz -> itIz = aux2;
+		
+		hijoMeDe.raiz -> hijoIz.raiz = p -> hijoMeDe.raiz;
+		
+		hijoMeDe.raiz -> hijoMeIz.raiz = p -> hijoDe.raiz;
+		
+		hijoMeIz.raiz -> hijoMeDe.raiz = NULL;
+		
+		hijoMeIz.raiz -> hijoDe.raiz = NULL;
+		
+		hijoMeIz.raiz -> itMe = hijoMeIz.raiz -> itDe = 0;
+	}
+	
+	else if (p == hijoMeDe.raiz)
+	{
+		aux = p -> itIz;
+		
+		aux2 = p -> itDe;
+		
+		tipo_nodo++;
+		
+		itDe = hijoMeDe.raiz -> itMe;
+		
+		hijoMeDe.raiz -> tipo_nodo = 1;
+		
+		hijoDe.raiz = new TA234Nodo;
+		
+		hijoDe.raiz -> tipo_nodo = 1;
+		
+		hijoDe.raiz -> hijoIz.raiz = hijoMeDe.raiz -> hijoMeDe.raiz;
+		
+		hijoDe.raiz -> hijoMeIz.raiz = hijoMeDe.raiz -> hijoDe.raiz;
+		
+		hijoMeDe.raiz -> hijoMeDe.raiz = NULL;
+		
+		hijoMeDe.raiz -> hijoDe.raiz = NULL;
+		
+		hijoDe.raiz -> itIz = aux2;
+		
+		hijoMeDe.raiz -> itMe = hijoMeDe.raiz -> itDe = 0;
 	}
 }
 
