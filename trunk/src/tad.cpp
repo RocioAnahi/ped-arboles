@@ -50,7 +50,7 @@ int main ()
 	# else
 	
 	TComplejo c1 (5,5), c2 (80,80), c3 (73,73), c4 (18,18), c5 (30,30), c6 (74,74), c7 (78,78), 
-	c8 (89,89), c9 (99,99), c10 (76,76), c11(75,75), c12(10,10), c14(90,90);
+	c8 (89,89), c9 (99,99), c10 (76,76), c11(75,75), c12(10,10), c14(90,90), c15(7,7), c16(1,1),c17;
 	
 	TA234Com a;
 	
@@ -67,10 +67,36 @@ int main ()
 	a.Insertar (c11);
 	a.Insertar (c12);
 	a.Insertar (c14);
-	//~ a.Insertar (c12);
-	//~ 
+	a.Insertar (c17);
+	a.Insertar (c16);
+	
 	cout << a.Inorden () << endl<< endl;
-	cout << a.Niveles () << endl;
+	
+	cout << a.Niveles () << endl<< endl;
+	
+	cout << a.Nodos() << " nodos" << endl << endl;
+	
+	cout << a.NodosHoja () << " hojas" << endl << endl;
+	
+	cout << "altura " << a.Altura() << endl << endl;
+	
+	if (!a.Buscar (c15))
+	{
+		cout << "Busca bien" << endl;
+	}
+	
+	else
+	{
+		cout << "No busca" << endl;
+	}
+	
+	//~ TA234Com b(a);
+	
+	//~ cout << b.Inorden () << endl;
+	//~ if (b == a)
+	//~ {
+		//~ cout << "Parece que el ctor de copia funciona" << endl << endl;
+	//~ }
 	
 	# endif
 }
