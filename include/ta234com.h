@@ -116,7 +116,7 @@ class TA234Com
 		
 		bool EsHoja ();
 		
-		void DivideRaiz (TA234Nodo *);
+		void DivideRaiz (TA234Nodo *, TA234Nodo*);
 		
 };
 
@@ -183,6 +183,8 @@ class TA234Nodo
 		void DivideHijoDe2 (TA234Nodo*);
 		
 		void DivideHijoDe3 (TA234Nodo*);
+		
+		//~ TA234Nodo* DivideRaiz ();
 };
 
 

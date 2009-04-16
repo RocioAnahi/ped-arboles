@@ -293,6 +293,8 @@ TA234Com::Niveles ()
 bool
 TA234Com::Insertar (TComplejo &c)
 {
+	TA234Nodo* aux;
+	
 	TA234Nodo *p; // hijo
 	
 	TA234Nodo *q; // padre
@@ -314,9 +316,21 @@ TA234Com::Insertar (TComplejo &c)
 	
 	else
 	{
-		if (p -> tipo_nodo == 3)
+		if (q -> tipo_nodo == 3)
 		{
-			DivideRaiz(p);
+			DivideRaiz(q,p);
+			
+			
+			
+			if (!c.Comparar(q -> itIz))
+			{
+				p = q -> hijoIz.raiz;
+			}
+			
+			else
+			{
+				p = q -> hijoMeIz.raiz;
+			}
 		}
 		
 		noencontrado = true;
@@ -628,7 +642,7 @@ TA234Nodo::DivideHijoDe3 (TA234Nodo* p)
 	}
 }
 
-void
+/*void
 TA234Com::DivideRaiz (TA234Nodo *a)
 {	
 	raiz = new TA234Nodo;
@@ -668,6 +682,38 @@ TA234Com::DivideRaiz (TA234Nodo *a)
 	raiz -> hijoIz.raiz -> tipo_nodo = 1;
 	
 	raiz -> hijoMeIz.raiz -> tipo_nodo = 1;
+}*/
+
+void
+TA234Com::DivideRaiz (TA234Nodo* q, TA234Nodo* p)
+{
+	TA234Nodo* aux = new TA234Nodo;
+	
+	TA234Nodo* hijo_aux = new TA234Nodo;
+	
+	aux -> tipo_nodo = hijo_aux -> tipo_nodo = 1;
+	
+	aux -> hijoMeIz.raiz = hijo_aux;
+	
+	hijo_aux -> itIz = q -> itDe;
+	
+	aux -> itIz = q -> itMe;
+	
+	hijo_aux -> hijoIz.raiz = q -> hijoMeDe.raiz;
+	
+	q -> hijoMeDe.raiz = NULL;
+	
+	hijo_aux -> hijoMeIz.raiz = q -> hijoDe.raiz;
+	
+	q -> hijoDe.raiz = NULL;
+	
+	q-> itMe = q -> itDe = 0;
+	
+	q -> tipo_nodo = 1;
+	
+	aux -> hijoIz.raiz = q;
+	
+	this -> raiz = aux;
 }
 
 void
