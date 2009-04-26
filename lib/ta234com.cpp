@@ -558,6 +558,8 @@ TA234Com::Insertar (TComplejo &c)
 		raiz -> tipo_nodo = 1;
 		
 		raiz -> itIz = c;
+
+		salida = true;
 	}
 	
 	else
