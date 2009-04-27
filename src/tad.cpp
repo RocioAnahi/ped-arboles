@@ -215,7 +215,7 @@ int main ()
 	{
 		cout << "Se ha insertado con éxito el complejo " << c1 << endl;
 		
-		/*if (a.Insertar(c2))
+		if (a.Insertar(c2))
 		{
 			cout << "Se ha insertado con éxito el complejo " << c2 << endl;
 			
@@ -343,7 +343,7 @@ int main ()
 		else
 		{
 			cout << "No se ha podido insertar el complejo " << c2 << endl;
-		}*/
+		}
 	}
 
 	else
@@ -362,6 +362,11 @@ int main ()
 	}
 
 	cout << a.Inorden () << endl << a.Niveles () << endl;
+	
+	if (a.Insertar (c7))
+		cout << "mal" << endl;
+	
+	cout << "para coño" << endl;
 	
 	/*TComplejo c1 (5,5), c2 (80,80), c3 (73,73), c4 (18,18), c5 (30,30), c6 (74,74), c7 (78,78), 
 	c8 (89,89), c9 (99,99), c10 (76,76), c11(75,75), c12(10,10), c14(90,90), c15(7,7), c16(1,1),c17;
