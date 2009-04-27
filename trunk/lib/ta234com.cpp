@@ -568,59 +568,10 @@ TA234Com::Insertar (TComplejo &c)
 		{
 			DivideRaiz(q, p);
 			
-			if (!c.Comparar(q -> itIz))
-			{
-				p = q -> hijoIz.raiz;
-			}
-			
-			else
-			{
-				p = q -> hijoMeIz.raiz;
-			}
+			p=q=raiz;
 		}
 		
 		noencontrado = true;
-		
-		switch (raiz -> Comparar (c))
-		{
-			case 0:
-				
-				salida = false;
-				
-				noencontrado = false;
-				
-				break;
-			
-			case 1:
-				
-				p = raiz -> hijoIz.raiz;
-				
-				break;
-			
-			case 2:
-				
-				p = raiz -> hijoMeIz.raiz;
-				
-				break;
-			
-			case 3:
-			
-				p = raiz -> hijoMeDe.raiz;
-				
-				break;
-			
-			case 4:
-			
-				p = raiz -> hijoDe.raiz;
-				
-				break;
-			
-			case 5: // el nodo es una hoja
-				
-				salida = raiz -> InsertarAux (c);
-				
-				noencontrado = false;
-		}
 		
 		while (noencontrado)
 		{
@@ -630,35 +581,14 @@ TA234Com::Insertar (TComplejo &c)
 				{
 					q -> DivideHijoDe2 (p);
 					
-					if (!c.Comparar(q->itIz))
-					{
-						p = q -> hijoMeIz.raiz;
-					}
-					
-					if (!c.Comparar (q -> itMe))
-					{
-						p = q -> hijoMeDe.raiz;
-					}
+					p=q;
 				}
 				
 				else
 				{
 					q -> DivideHijoDe3 (p);
 					
-					if (!c.Comparar(q->itIz))
-					{
-						p = q -> hijoMeIz.raiz;
-					}
-					
-					if (!c.Comparar(q->itMe))
-					{
-						p = q -> hijoMeDe.raiz;
-					}
-					
-					if (!c.Comparar(q->itDe))
-					{
-						p = q -> hijoDe.raiz;
-					}
+					p=q;
 				}
 			}
 			
@@ -716,48 +646,6 @@ TA234Com::Insertar (TComplejo &c)
 	
 	return (salida);
 }
-
-/*void
-TA234Com::DivideRaiz (TA234Nodo *a)
-{	
-	raiz = new TA234Nodo;
-	
-	raiz -> hijoIz.raiz = new TA234Nodo;
-	
-	raiz -> hijoIz.raiz -> itIz = a -> itIz;
-	
-	raiz -> hijoMeIz.raiz = new TA234Nodo;
-	
-	raiz -> hijoMeIz.raiz -> itIz = a -> itDe;
-	
-	raiz -> itIz = a -> itMe;
-	
-	raiz -> hijoIz.raiz -> hijoIz = a -> hijoIz;
-	
-	raiz -> hijoIz.raiz -> hijoMeIz = a -> hijoMeIz;
-	
-	raiz -> hijoMeIz.raiz -> hijoIz = a -> hijoMeDe;
-	
-	raiz -> hijoMeIz.raiz -> hijoMeIz = a -> hijoDe;
-	
-	a -> hijoIz.raiz = NULL;
-	
-	a -> hijoMeIz.raiz = NULL;
-	
-	a -> hijoMeDe.raiz = NULL;
-	
-	a -> hijoDe.raiz = NULL;
-	
-	delete a;
-	
-	a = raiz;
-	
-	raiz -> tipo_nodo = 1;
-	
-	raiz -> hijoIz.raiz -> tipo_nodo = 1;
-	
-	raiz -> hijoMeIz.raiz -> tipo_nodo = 1;
-}*/
 
 void
 TA234Com::DivideRaiz (TA234Nodo* q, TA234Nodo* p)
