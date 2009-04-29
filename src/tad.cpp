@@ -362,11 +362,43 @@ int main ()
 	}
 
 	cout << a.Inorden () << endl << a.Niveles () << endl;
+
+	cout << "El árbol tiene altura " << a.Altura() << endl << "El árbol tiene " << a.Nodos() << " nodos, de los cuales " << a.NodosHoja() << " son hojas" << endl;
+
+	if (a.Buscar (c5) && !a.Buscar(c15))
+	{
+		cout << "Busca bien" << endl;
+	}
+
+	else
+	{
+		cout << "NO busca bien" << endl;
+	}
+
+
+	if (a.Insertar (c14))
+	{
+		cout << "OJO!!! Permites la inserción de repetidos" << endl;
+	}
+
+	else
+	{
+		cout << "Bien en la inserción de repetidos" << endl;
+	}
+
+	TA234Com b(a);
+
+	cout << b.Niveles() << endl << a.Niveles() << endl;
 	
 	if (a.Insertar (c7))
-		cout << "mal" << endl;
+	{
+		cout << "Mal en la inserción de repetidos" << endl;
+	}
 	
-	cout << "para coño" << endl;
+	else
+	{
+		cout << "Bien en la inserción de repetidos" << endl;
+	}
 	
 	/*TComplejo c1 (5,5), c2 (80,80), c3 (73,73), c4 (18,18), c5 (30,30), c6 (74,74), c7 (78,78), 
 	c8 (89,89), c9 (99,99), c10 (76,76), c11(75,75), c12(10,10), c14(90,90), c15(7,7), c16(1,1),c17;
