@@ -390,14 +390,9 @@ int main ()
 
 	cout << b.Niveles() << endl << a.Niveles() << endl;
 	
-	if (a.Insertar (c7))
+	if (a.Insertar (c14))
 	{
 		cout << "Mal en la inserción de repetidos" << endl;
-	}
-	
-	else
-	{
-		cout << "Bien en la inserción de repetidos" << endl;
 	}
 	
 	/*TComplejo c1 (5,5), c2 (80,80), c3 (73,73), c4 (18,18), c5 (30,30), c6 (74,74), c7 (78,78), 
