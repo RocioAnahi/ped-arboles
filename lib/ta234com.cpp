@@ -8,7 +8,14 @@ TA234Nodo::TA234Nodo (): tipo_nodo(0)
 {
 }
 
-TA234Nodo::TA234Nodo (const TA234Nodo &n): tipo_nodo(n.tipo_nodo), itIz(n.itIz), itMe(n.itMe), itDe(n.itDe), hijoIz(n.hijoIz), hijoMeIz(n.hijoMeIz), hijoMeDe(n.hijoMeDe), hijoDe(n.hijoDe)
+TA234Nodo::TA234Nodo (const TA234Nodo &n): tipo_nodo(n.tipo_nodo), 
+itIz(n.itIz), 
+itMe(n.itMe), 
+itDe(n.itDe), 
+hijoIz(n.hijoIz), 
+hijoMeIz(n.hijoMeIz), 
+hijoMeDe(n.hijoMeDe), 
+hijoDe(n.hijoDe)
 {
 }
 
@@ -359,6 +366,8 @@ TA234Com::TA234Com (): raiz(NULL)
 
 TA234Com::TA234Com (const TA234Com &a)
 {
+	raiz=NULL;
+	
 	if (a.raiz != NULL)
 	{
 		raiz = new TA234Nodo (*(a.raiz));
