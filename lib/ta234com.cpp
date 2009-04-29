@@ -691,8 +691,11 @@ TA234Com::DivideRaiz (TA234Nodo* q, TA234Nodo* p)
 bool
 TA234Com::EsHoja () const
 {
-	return (raiz -> hijoIz.raiz == NULL && raiz -> hijoMeIz.raiz == NULL && 
-	raiz -> hijoMeDe.raiz == NULL && raiz -> hijoDe.raiz == NULL);
+	if (raiz!=NULL)
+		return (raiz -> hijoIz.raiz == NULL && raiz -> hijoMeIz.raiz == NULL && 
+		raiz -> hijoMeDe.raiz == NULL && raiz -> hijoDe.raiz == NULL);
+	else
+		return false;
 }
 
 int
@@ -737,18 +740,21 @@ TA234Com::NodosHoja () const
 int
 TA234Com::Altura () const
 {
-	int salida;
+	int salida=0;
 	
-	if (EsHoja())
+	if (raiz!=NULL)
 	{
-		salida = 1;
+		if (EsHoja())
+		{
+			salida = 1;
+		}
+		
+		else
+		{
+			salida = 1 + raiz -> hijoIz.Altura();
+		}
 	}
-	
-	else
-	{
-		salida = 1 + raiz -> hijoIz.Altura();
-	}
-	
+		
 	return (salida);
 }
 
