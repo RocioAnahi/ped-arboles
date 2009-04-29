@@ -568,7 +568,7 @@ TA234Com::Insertar (TComplejo &c)
 		{
 			DivideRaiz(q, p);
 			
-			p=q=raiz;
+			p = q = raiz;
 		}
 		
 		noencontrado = true;

@@ -135,7 +135,11 @@ class TComplejo
 		 * 		-Entradas: no hay parámetros de entrada\n
 		 * 		-Salida: un número real*/
 		double Mod (void)	const;
-		
+
+		//!	\brief	Método que compara dos números complejos
+		/*!	Método que compara dos números complejos para saber hacia dónde ir en el árbol.\n
+					-True: debemos ir hacia la izquierda.\n
+					-False: debemos ir hacia la derecha.*/
 		bool Comparar (TComplejo &);
 		
 	private:
