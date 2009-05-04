@@ -353,6 +353,303 @@ TA234Nodo::Comparar (TComplejo &c)
 	}
 }
 
+void
+TA234Nodo::BorrarAux (TComplejo &c)
+{
+	if (tipo_nodo==1)
+		tipo_nodo=0;
+	else if (tipo_nodo==2)
+	{
+		if (itIz==c)
+		{
+			itIz=itMe;
+			tipo_nodo=1;
+		}
+		else
+			tipo_nodo=1;
+	}
+	else
+	{
+		if (itIz==c)
+		{
+			itIz=itMe;
+			itMe=itDe;
+			tipo_nodo=2;
+		}
+		else if (itMe==c)
+		{
+			itMe=itDe;
+			tipo_nodo=2;
+		}
+		else
+		{
+			tipo_nodo=2;
+		}
+	}
+}
+
+void
+TA234Nodo::Sustituir (TA234Nodo *hijo, TA234Nodo *hermano, TComplejo& c)
+{
+	TComplejo *complejo=NULL;
+	TComplejo *sustituir=NULL;
+	TComplejo aux;
+	
+	if (tipo_nodo==1)
+	{
+		sustituir=hijoIz.Mayor ();
+			
+		complejo=&itIz;
+		
+	}
+	else if (tipo_nodo==2)
+	{
+		if (itIz==c)
+		{
+			sustituir=hijoIz.Mayor ();
+			
+			complejo=&itIz;
+		}
+		else
+		{
+			sustituir=hijoMeIz.Mayor ();
+			
+			complejo=&itMe;
+		}
+	}
+	else
+	{
+		if (itIz==c)
+		{
+			sustituir=hijoIz.Mayor ();
+			
+			complejo=&itIz;
+			
+		}
+		else if (itMe==c)
+		{
+			sustituir=hijoMeIz.Mayor ();
+				
+			complejo=&itMe;
+		}
+		else
+		{
+			sustituir=hijoMeDe.Mayor ();
+				
+			complejo=&itDe;
+		}
+	}
+	
+	aux=*complejo;
+	*complejo=*sustituir;
+	*sustituir=aux;
+}
+
+void
+TA234Nodo::Ceder (TA234Nodo *hijo, TA234Nodo *hermano, int comparar)
+{
+	switch (comparar)
+	{
+		case 1:
+			hijoIz.raiz->itMe=itIz;
+			itIz=hijoMeIz.raiz->itIz;
+			hijoIz.raiz->hijoMeDe.raiz=hijoMeIz.raiz->hijoIz.raiz;
+			hijoIz.raiz->tipo_nodo++;
+			hijoMeIz.raiz->tipo_nodo--;
+			hijoMeIz.raiz->hijoIz.raiz=hijoMeIz.raiz->hijoMeIz.raiz;
+			hijoMeIz.raiz->hijoMeIz.raiz=hijoMeIz.raiz->hijoMeDe.raiz;
+			hijoMeIz.raiz->hijoMeDe.raiz=hijoMeIz.raiz->hijoDe.raiz;
+			hijoMeIz.raiz->itIz=hijoMeIz.raiz->itMe;
+			hijoMeIz.raiz->itMe=hijoMeIz.raiz->itDe;
+			
+			break;
+		case 2:
+			hijoMeIz.raiz->itMe=hijoMeIz.raiz->itIz;
+			hijoMeIz.raiz->hijoMeDe.raiz=hijoMeIz.raiz->hijoMeIz.raiz;
+			hijoMeIz.raiz->hijoMeIz.raiz=hijoMeIz.raiz->hijoIz.raiz;
+			hijoMeIz.raiz->itIz=itIz;
+			hijoMeIz.raiz->tipo_nodo++;
+			if (hermano->tipo_nodo==2)
+			{
+				hijoMeIz.raiz->hijoIz.raiz=hijoIz.raiz->hijoMeDe.raiz;
+				itIz=hijoIz.raiz->itMe;
+				hijoIz.raiz->tipo_nodo--;
+			}
+			else
+			{
+				hijoMeIz.raiz->hijoIz.raiz=hijoIz.raiz->hijoDe.raiz;
+				itIz=hijoIz.raiz->itDe;
+				hijoIz.raiz->tipo_nodo--;
+			}
+		
+			break;
+		case 3:
+			hijoMeDe.raiz->itMe=hijoMeDe.raiz->itIz;
+			hijoMeDe.raiz->hijoMeDe.raiz=hijoMeDe.raiz->hijoMeIz.raiz;
+			hijoMeDe.raiz->hijoMeIz.raiz=hijoMeDe.raiz->hijoIz.raiz;
+			hijoMeDe.raiz->itIz=itMe;
+			hijoMeDe.raiz->tipo_nodo++;
+			if (hermano->tipo_nodo==2)
+			{
+				hijoMeDe.raiz->hijoIz.raiz=hijoMeIz.raiz->hijoMeDe.raiz;
+				itMe=hijoMeIz.raiz->itMe;
+				hijoMeIz.raiz->tipo_nodo--;
+			}
+			else
+			{
+				hijoMeDe.raiz->hijoIz.raiz=hijoMeIz.raiz->hijoDe.raiz;
+				itMe=hijoMeIz.raiz->itDe;
+				hijoMeIz.raiz->tipo_nodo--;
+			}
+			
+			break;
+		case 4:
+			hijoDe.raiz->itMe=hijoDe.raiz->itIz;
+			hijoDe.raiz->hijoMeDe.raiz=hijoDe.raiz->hijoMeIz.raiz;
+			hijoDe.raiz->hijoMeIz.raiz=hijoDe.raiz->hijoIz.raiz;
+			hijoDe.raiz->itIz=itDe;
+			hijoDe.raiz->tipo_nodo++;
+			if (hermano->tipo_nodo==2)
+			{
+				hijoDe.raiz->hijoIz.raiz=hijoMeDe.raiz->hijoMeDe.raiz;
+				itDe=hijoMeDe.raiz->itMe;
+				hijoMeDe.raiz->tipo_nodo--;
+			}
+			else
+			{
+				hijoDe.raiz->hijoIz.raiz=hijoMeDe.raiz->hijoDe.raiz;
+				itDe=hijoMeDe.raiz->itDe;
+				hijoMeDe.raiz->tipo_nodo--;
+			}
+			
+			break;
+	}
+}
+
+void
+TA234Nodo::Combinar (TA234Nodo *&hijo, TA234Nodo *&hermano, int comparar)
+{
+	switch (comparar)
+	{
+		case 1:
+			hijoIz.raiz->itMe=itIz;
+			hijoIz.raiz->itDe=hijoMeIz.raiz->itIz;
+			hijoIz.raiz->hijoMeDe.raiz=hijoMeIz.raiz->hijoIz.raiz;
+			hijoIz.raiz->hijoDe.raiz=hijoMeIz.raiz->hijoMeIz.raiz;
+			
+			hijoMeIz.raiz->hijoIz.raiz=NULL;
+			hijoMeIz.raiz->hijoMeIz.raiz=NULL;
+			
+			hijoIz.raiz->tipo_nodo=3;
+			
+			itIz=itMe;
+			itMe=itDe;
+			
+			delete hijoMeIz.raiz;
+			
+			hijoMeIz.raiz=hijoMeDe.raiz;
+			hijoMeDe.raiz=hijoDe.raiz;
+			hijoDe.raiz=NULL;
+			tipo_nodo--;
+			hijo=hijoIz.raiz;
+			hermano=hijoMeIz.raiz;
+			
+			break;
+		case 2:
+			hijoIz.raiz->itMe=itIz;
+			hijoIz.raiz->itDe=hijoMeIz.raiz->itIz;
+			hijoIz.raiz->hijoMeDe.raiz=hijoMeIz.raiz->hijoIz.raiz;
+			hijoIz.raiz->hijoDe.raiz=hijoMeIz.raiz->hijoMeIz.raiz;
+			
+			hijoMeIz.raiz->hijoIz.raiz=NULL;
+			hijoMeIz.raiz->hijoMeIz.raiz=NULL;
+			
+			hijoIz.raiz->tipo_nodo=3;
+			
+			itIz=itMe;
+			itMe=itDe;
+			
+			delete hijoMeIz.raiz;
+			
+			hijoMeIz.raiz=hijoMeDe.raiz;
+			hijoMeDe.raiz=hijoDe.raiz;
+			hijoDe.raiz=NULL;
+			tipo_nodo--;
+			hijo=hijoIz.raiz;
+			hermano=hijoMeIz.raiz;
+			
+			break;
+		case 3:
+			hijoMeIz.raiz->itMe=itMe;
+			hijoMeIz.raiz->itDe=hijoMeDe.raiz->itIz;
+			hijoMeIz.raiz->hijoMeDe.raiz=hijoMeDe.raiz->hijoIz.raiz;
+			hijoMeIz.raiz->hijoDe.raiz=hijoMeDe.raiz->hijoMeIz.raiz;
+			
+			hijoMeDe.raiz->hijoIz.raiz=NULL;
+			hijoMeDe.raiz->hijoMeIz.raiz=NULL;
+			
+			hijoMeIz.raiz->tipo_nodo=3;
+			
+			itMe=itDe;
+			
+			delete hijoMeDe.raiz;
+			
+			
+			hijoMeDe.raiz=hijoDe.raiz;
+			hijoDe.raiz=NULL;
+			hijo=hijoMeIz.raiz;
+			hermano=hijoIz.raiz;
+			
+			tipo_nodo--;
+			
+			break;
+		case 4:
+			hijoMeDe.raiz->itMe=itDe;
+			hijoMeDe.raiz->itDe=hijoDe.raiz->itIz;
+			hijoMeDe.raiz->hijoMeDe.raiz=hijoDe.raiz->hijoIz.raiz;
+			hijoMeDe.raiz->hijoDe.raiz=hijoDe.raiz->hijoMeIz.raiz;
+			
+			hijoMeDe.raiz->tipo_nodo=3;
+			
+			tipo_nodo--;
+			
+			delete hijoDe.raiz;
+			
+			hijoDe.raiz=NULL;
+			
+			hijo=hijoMeDe.raiz;
+			hermano=hijoMeIz.raiz;
+			
+			break;
+	}
+}
+
+void
+TA234Nodo::CombinarEnUno ()
+{
+	TA234Nodo *iz=hijoIz.raiz;
+	TA234Nodo *de=hijoMeIz.raiz;
+	
+	itMe=itIz;
+	itIz=hijoIz.raiz->itIz;
+	itDe=hijoMeIz.raiz->itIz;
+	
+	hijoIz.raiz=iz->hijoIz.raiz;
+	hijoMeIz.raiz=iz->hijoMeIz.raiz;
+	hijoMeDe.raiz=de->hijoIz.raiz;
+	hijoDe.raiz=de->hijoMeIz.raiz;
+	
+	iz->hijoIz.raiz=NULL;
+	iz->hijoMeIz.raiz=NULL;
+	de->hijoIz.raiz=NULL;
+	de->hijoMeIz.raiz=NULL;
+	
+	tipo_nodo=3;
+	
+	delete iz;
+	delete de;
+}
+
 TA234Com::TA234Com (): raiz(NULL)
 {
 }
@@ -854,6 +1151,153 @@ TA234Com::Buscar (TComplejo &c) const
 	}
 	
 	return (salida);
+}
+
+bool
+TA234Com::Borrar (TComplejo &c)
+{
+	TA234Nodo *padre, *hijo, *hermano=NULL;
+	int comparar;
+	bool salida=false, error=false, rotar=false, combinar=false, sustituido=false;
+	
+	if (!EsVacio())
+	{
+		padre=hijo=hermano=raiz;
+		
+		while (!error)
+		{	
+			
+			if (!rotar)
+			{
+				switch ((comparar=padre->Comparar (c)))
+				{
+					case 0:
+						if (padre->itIz==c)
+						{
+							hijo=padre->hijoIz.raiz;
+							hermano=padre->hijoMeIz.raiz;
+							comparar=1;
+						}
+						else if (padre->itMe==c)
+						{
+							hijo=padre->hijoMeIz.raiz;
+							hermano=padre->hijoIz.raiz;
+							comparar=2;
+						}
+						else
+						{
+							hijo=padre->hijoMeDe.raiz;
+							hermano=padre->hijoMeIz.raiz;
+							comparar=3;
+						}
+						
+						padre->Sustituir (hijo,hermano,c);
+						sustituido=true;
+						
+					case 1:
+						hijo=padre->hijoIz.raiz;
+						hermano=padre->hijoMeIz.raiz;
+						break;
+					case 2:
+						hijo=padre->hijoMeIz.raiz;
+						hermano=padre->hijoIz.raiz;
+						break;
+					case 3:
+						hijo=padre->hijoMeDe.raiz;
+						hermano=padre->hijoMeIz.raiz;
+						break;
+					case 4:
+						hijo=padre->hijoDe.raiz;
+						hermano=padre->hijoMeDe.raiz;
+						break;
+					//~ hoja
+					case 5:
+						if (padre->itIz==c || padre->itMe==c || padre->itDe==c)
+						{
+							padre->BorrarAux(c);
+							salida=true;
+						}
+						error=true;
+
+						break;
+				}
+			}
+			else if (sustituido && combinar)
+			{
+				hijo=padre->hijoMeIz.raiz;
+				hermano=padre->hijoIz.raiz;
+				
+				combinar=false;
+				sustituido=false;
+			}
+			
+			rotar=false;
+			
+			if (comparar!=5 && !salida)
+			{
+				if (hijo->tipo_nodo==1)
+				{
+					if (hermano->tipo_nodo==1 && padre->tipo_nodo==1)
+					{
+						padre->CombinarEnUno ();
+						hijo=padre;
+						hermano=padre;
+						combinar=true;
+					}
+					else if (hermano->tipo_nodo==1)
+					{
+						padre->Combinar (hijo, hermano, comparar);
+						combinar=true;
+					}
+					else
+						padre->Ceder (hijo, hermano, comparar);
+						
+					rotar=true;
+				}
+			}
+					
+			if (!rotar)
+			{
+				padre=hijo;
+				hermano=hijo;
+			}
+		}
+	}
+	
+	return salida;
+}
+
+TComplejo*
+TA234Com::Mayor ()
+{
+	TComplejo* aux[]={&raiz->itIz, &raiz->itMe, &raiz->itDe};
+	TA234Com* hijos[]={&raiz->hijoIz, &raiz->hijoMeIz, &raiz->hijoMeDe, &raiz->hijoDe};
+	TComplejo *mayor=&raiz->itIz;
+	
+	for (int i=1;i<raiz->tipo_nodo;i++)
+	{
+		if (!aux[i]->Comparar (*mayor))
+		{
+			mayor=aux[i];
+		}
+	}
+	
+	for (int i=0;i<raiz->tipo_nodo+1;i++)
+	{
+		TComplejo *hijo;
+		
+		if (hijos[i]->raiz!=NULL)
+		{
+			hijo=hijos[i]->Mayor();
+			
+			if (!hijo->Comparar (*mayor))
+			{
+				mayor=hijo;
+			}
+		}
+	}
+	
+	return mayor;
 }
 
 TElemColaA234Com::TElemColaA234Com (): arbol(NULL), sig(NULL)

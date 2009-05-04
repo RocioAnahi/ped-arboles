@@ -197,203 +197,206 @@ int main ()
 	
 	TA234Com a;
 
-	TComplejo c1(10,10), c2(20,20), c3(12,12), c4(23,23), c5(21,21), c6(22,22), c7(19,19), c8(7,7), c9(6,6), c10(1,1), c11(3,3), c12(4,4), c13(9,9), c14(14,14), c15;
+	TComplejo c1(100, 100), c2(50, 50), c3(200, 200), c4(80, 80), c5(70, 70), c6(90, 90), c7(220, 220), c8(20, 20), 
+	c9(60, 60), c10(95, 95), c11(250, 250), c12(300, 300), c13(150, 150), c14(85, 85), c15 (30, 30), c16 (30, 30),
+	c17(10, 10), c18(25, 25), c19(40, 40), c20(45, 45), c21(65, 65), c22(125, 125), c23 (270, 270), c24 (260, 260),
+	c25 (110, 110), c26 (210, 210);
 
-	if (a.EsVacio ())
-	{
-		cout << "El árbol está vacío" << endl; 
-	}
+	//~ if (a.EsVacio ())
+	//~ {
+		//~ cout << "El árbol está vacío" << endl; 
+	//~ }
+//~ 
+	//~ else
+	//~ {
+		//~ cout << "El árbol debería estar vacío" << endl;
+	//~ }
+//~ 
+	//~ cout << a.Inorden () << endl << a.Niveles () << endl;
+	//~ 
+	//~ if (a.Insertar(c1))
+	//~ {
+		//~ cout << "Se ha insertado con éxito el complejo " << c1 << endl;
+		//~ 
+		//~ if (a.Insertar(c2))
+		//~ {
+			//~ cout << "Se ha insertado con éxito el complejo " << c2 << endl;
+			//~ 
+			//~ if (a.Insertar(c3))
+			//~ {
+				//~ cout << "Se ha insertado con éxito el complejo " << c3 << endl;
+				//~ 
+				//~ if (a.Insertar(c4))
+				//~ {
+					//~ cout << "Se ha insertado con éxito el complejo " << c4 << endl;
+					//~ 
+					//~ if (a.Insertar(c5))
+					//~ {
+						//~ cout << "Se ha insertado con éxito el complejo " << c5 << endl;
+						//~ 
+						//~ if (a.Insertar(c6))
+						//~ {
+							//~ cout << "Se ha insertado con éxito el complejo " << c6 << endl;
+							//~ 
+							//~ if (a.Insertar(c7))
+							//~ {
+								//~ cout << "Se ha insertado con éxito el complejo " << c7 << endl;
+								//~ 
+								//~ if (a.Insertar(c8))
+								//~ {
+									//~ cout << "Se ha insertado con éxito el complejo " << c8 << endl;
+									//~ 
+									//~ if (a.Insertar(c9))
+									//~ {
+										//~ cout << "Se ha insertado con éxito el complejo " << c9 << endl;
+										//~ 
+										//~ if (a.Insertar(c10))
+										//~ {
+											//~ cout << "Se ha insertado con éxito el complejo " << c10 << endl;
+											//~ 
+											//~ if (a.Insertar(c11))
+											//~ {
+												//~ cout << "Se ha insertado con éxito el complejo " << c11 << endl;
+												//~ 
+												//~ if (a.Insertar(c12))
+												//~ {
+													//~ cout << "Se ha insertado con éxito el complejo " << c12 << endl;
+													//~ 
+													//~ if (a.Insertar(c13))
+													//~ {
+														//~ cout << "Se ha insertado con éxito el complejo " << c13 << endl;
+														//~ 
+														//~ if (a.Insertar(c14))
+														//~ {
+															//~ cout << "Se ha insertado con éxito el complejo " << c14 << endl;
+														//~ }
+														//~ 
+														//~ else
+														//~ {
+															//~ cout << "No se ha podido insertar el complejo " << c14 << endl;
+														//~ }
+													//~ }
+//~ 
+													//~ else
+													//~ {
+														//~ cout << "No se ha podido insertar el complejo " << c13 << endl;
+													//~ }
+												//~ }
+//~ 
+												//~ else
+												//~ {
+													//~ cout << "No se ha podido insertar el complejo " << c12 << endl;
+												//~ }
+											//~ }
+//~ 
+											//~ else
+											//~ {
+												//~ cout << "No se ha podido insertar el complejo " << c11 << endl;
+											//~ }
+										//~ }
+//~ 
+										//~ else
+										//~ {
+											//~ cout << "No se ha podido insertar el complejo " << c10 << endl;
+										//~ }
+									//~ }
+//~ 
+									//~ else
+									//~ {
+										//~ cout << "No se ha podido insertar el complejo " << c9 << endl;
+									//~ }
+								//~ }
+//~ 
+								//~ else
+								//~ {
+									//~ cout << "No se ha podido insertar el complejo " << c8 << endl;
+								//~ }
+							//~ }
+//~ 
+							//~ else
+							//~ {
+								//~ cout << "No se ha podido insertar el complejo " << c7 << endl;
+							//~ }
+						//~ }
+//~ 
+						//~ else
+						//~ {
+							//~ cout << "No se ha podido insertar el complejo " << c6 << endl;
+						//~ }
+					//~ }
+//~ 
+					//~ else
+					//~ {
+						//~ cout << "No se ha podido insertar el complejo " << c5 << endl;
+					//~ }
+				//~ }
+//~ 
+				//~ else
+				//~ {
+					//~ cout << "No se ha podido insertar el complejo " << c4 << endl;
+				//~ }
+			//~ }
+//~ 
+			//~ else
+			//~ {
+				//~ cout << "No se ha podido insertar el complejo " << c3 << endl;
+			//~ }
+		//~ }
+//~ 
+		//~ else
+		//~ {
+			//~ cout << "No se ha podido insertar el complejo " << c2 << endl;
+		//~ }
+	//~ }
+//~ 
+	//~ else
+	//~ {
+		//~ cout << "No se ha podido insertar el complejo " << c1 << endl;
+	//~ }
+//~ 
+	//~ if (!a.EsVacio ())
+	//~ {
+		//~ cout << "El árbol NO está vacío" << endl; 
+	//~ }
+//~ 
+	//~ else
+	//~ {
+		//~ cout << "El árbol NO debería estar vacío" << endl;
+	//~ }
+//~ 
+	//~ cout << a.Inorden () << endl << a.Niveles () << endl;
+//~ 
+	//~ cout << "El árbol tiene altura " << a.Altura() << endl << "El árbol tiene " << a.Nodos() << " nodos, de los cuales " << a.NodosHoja() << " son hojas" << endl;
+//~ 
+	//~ if (a.Buscar (c5) && !a.Buscar(c15))
+	//~ {
+		//~ cout << "Busca bien" << endl;
+	//~ }
+//~ 
+	//~ else
+	//~ {
+		//~ cout << "NO busca bien" << endl;
+	//~ }
 
-	else
-	{
-		cout << "El árbol debería estar vacío" << endl;
-	}
 
-	cout << a.Inorden () << endl << a.Niveles () << endl;
+	//~ if (a.Insertar (c14))
+	//~ {
+		//~ cout << "OJO!!! Permites la inserción de repetidos" << endl;
+	//~ }
+//~ 
+	//~ else
+	//~ {
+		//~ cout << "Bien en la inserción de repetidos" << endl;
+	//~ }
+
+	//~ TA234Com b(a);
+
+	//~ cout << b.Niveles() << endl << a.Niveles() << endl;
 	
-	if (a.Insertar(c1))
-	{
-		cout << "Se ha insertado con éxito el complejo " << c1 << endl;
-		
-		if (a.Insertar(c2))
-		{
-			cout << "Se ha insertado con éxito el complejo " << c2 << endl;
-			
-			if (a.Insertar(c3))
-			{
-				cout << "Se ha insertado con éxito el complejo " << c3 << endl;
-				
-				if (a.Insertar(c4))
-				{
-					cout << "Se ha insertado con éxito el complejo " << c4 << endl;
-					
-					if (a.Insertar(c5))
-					{
-						cout << "Se ha insertado con éxito el complejo " << c5 << endl;
-						
-						if (a.Insertar(c6))
-						{
-							cout << "Se ha insertado con éxito el complejo " << c6 << endl;
-							
-							if (a.Insertar(c7))
-							{
-								cout << "Se ha insertado con éxito el complejo " << c7 << endl;
-								
-								if (a.Insertar(c8))
-								{
-									cout << "Se ha insertado con éxito el complejo " << c8 << endl;
-									
-									if (a.Insertar(c9))
-									{
-										cout << "Se ha insertado con éxito el complejo " << c9 << endl;
-										
-										if (a.Insertar(c10))
-										{
-											cout << "Se ha insertado con éxito el complejo " << c10 << endl;
-											
-											if (a.Insertar(c11))
-											{
-												cout << "Se ha insertado con éxito el complejo " << c11 << endl;
-												
-												if (a.Insertar(c12))
-												{
-													cout << "Se ha insertado con éxito el complejo " << c12 << endl;
-													
-													if (a.Insertar(c13))
-													{
-														cout << "Se ha insertado con éxito el complejo " << c13 << endl;
-														
-														if (a.Insertar(c14))
-														{
-															cout << "Se ha insertado con éxito el complejo " << c14 << endl;
-														}
-														
-														else
-														{
-															cout << "No se ha podido insertar el complejo " << c14 << endl;
-														}
-													}
-
-													else
-													{
-														cout << "No se ha podido insertar el complejo " << c13 << endl;
-													}
-												}
-
-												else
-												{
-													cout << "No se ha podido insertar el complejo " << c12 << endl;
-												}
-											}
-
-											else
-											{
-												cout << "No se ha podido insertar el complejo " << c11 << endl;
-											}
-										}
-
-										else
-										{
-											cout << "No se ha podido insertar el complejo " << c10 << endl;
-										}
-									}
-
-									else
-									{
-										cout << "No se ha podido insertar el complejo " << c9 << endl;
-									}
-								}
-
-								else
-								{
-									cout << "No se ha podido insertar el complejo " << c8 << endl;
-								}
-							}
-
-							else
-							{
-								cout << "No se ha podido insertar el complejo " << c7 << endl;
-							}
-						}
-
-						else
-						{
-							cout << "No se ha podido insertar el complejo " << c6 << endl;
-						}
-					}
-
-					else
-					{
-						cout << "No se ha podido insertar el complejo " << c5 << endl;
-					}
-				}
-
-				else
-				{
-					cout << "No se ha podido insertar el complejo " << c4 << endl;
-				}
-			}
-
-			else
-			{
-				cout << "No se ha podido insertar el complejo " << c3 << endl;
-			}
-		}
-
-		else
-		{
-			cout << "No se ha podido insertar el complejo " << c2 << endl;
-		}
-	}
-
-	else
-	{
-		cout << "No se ha podido insertar el complejo " << c1 << endl;
-	}
-
-	if (!a.EsVacio ())
-	{
-		cout << "El árbol NO está vacío" << endl; 
-	}
-
-	else
-	{
-		cout << "El árbol NO debería estar vacío" << endl;
-	}
-
-	cout << a.Inorden () << endl << a.Niveles () << endl;
-
-	cout << "El árbol tiene altura " << a.Altura() << endl << "El árbol tiene " << a.Nodos() << " nodos, de los cuales " << a.NodosHoja() << " son hojas" << endl;
-
-	if (a.Buscar (c5) && !a.Buscar(c15))
-	{
-		cout << "Busca bien" << endl;
-	}
-
-	else
-	{
-		cout << "NO busca bien" << endl;
-	}
-
-
-	if (a.Insertar (c14))
-	{
-		cout << "OJO!!! Permites la inserción de repetidos" << endl;
-	}
-
-	else
-	{
-		cout << "Bien en la inserción de repetidos" << endl;
-	}
-
-	TA234Com b(a);
-
-	cout << b.Niveles() << endl << a.Niveles() << endl;
-	
-	if (a.Insertar (c14))
-	{
-		cout << "Mal en la inserción de repetidos" << endl;
-	}
+	//~ if (a.Insertar (c14))
+	//~ {
+		//~ cout << "Mal en la inserción de repetidos" << endl;
+	//~ }
 
 	TA234Com c;
 
@@ -403,10 +406,27 @@ int main ()
 	{
 		cout << "Funcionan bien el ctor de copia, el operador asignación y el operador '=='" << endl;
 	}
-	/*TComplejo c1 (5,5), c2 (80,80), c3 (73,73), c4 (18,18), c5 (30,30), c6 (74,74), c7 (78,78), 
-	c8 (89,89), c9 (99,99), c10 (76,76), c11(75,75), c12(10,10), c14(90,90), c15(7,7), c16(1,1),c17;
+	//~ TComplejo c16 (21, 21), c17 (22, 22), c18 (23, 23);
+	//~ 
+	//~ a.Insertar (c16);
+	//~ a.Insertar (c17);
+	//~ a.Insertar (c18);
 	
-	TA234Com a;
+	//~ cout << a.Niveles () << endl;
+	
+	//~ a.Borrar (c4);
+	
+	//~ cout << a.Niveles () << endl;
+	
+	//~ a.Borrar (c6);
+	
+	//~ cout << a.Niveles () << endl;
+	
+	//~ a.Borrar (c5);
+	
+	//~ cout << a.Niveles () << endl;
+	
+	//~ a.Borrar (c1);
 	
 	a.Insertar (c1);
 	a.Insertar (c2);
@@ -420,29 +440,31 @@ int main ()
 	a.Insertar (c10);
 	a.Insertar (c11);
 	a.Insertar (c12);
+	a.Insertar (c13);
 	a.Insertar (c14);
-	a.Insertar (c17);
+	a.Insertar (c15);
 	a.Insertar (c16);
+	a.Insertar (c17);
+	a.Insertar (c18);
+	a.Insertar (c19);
+	a.Insertar (c20);
+	a.Insertar (c21);
+	a.Insertar (c22);
+	a.Insertar (c23);
+	a.Insertar (c24);
+	a.Insertar (c25);
+	a.Insertar (c26);
 	
-	cout << a.Inorden () << endl<< endl;
+	cout << a.Niveles () << endl;
 	
-	cout << a.Niveles () << endl<< endl;
+	a.Borrar (c10);
 	
-	cout << a.Nodos() << " nodos" << endl << endl;
+	cout << endl;
+	cout << a.Niveles () << endl;
 	
-	cout << a.NodosHoja () << " hojas" << endl << endl;
+	a.Borrar (c5);
 	
-	cout << "altura " << a.Altura() << endl << endl;
-	
-	if (!a.Buscar (c15))
-	{
-		cout << "Busca bien" << endl;
-	}
-	
-	else
-	{
-		cout << "No busca" << endl;
-	}*/
+	cout << endl << a.Niveles () << endl;
 	
 	# endif
 }
