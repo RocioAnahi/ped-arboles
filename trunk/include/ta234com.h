@@ -104,7 +104,7 @@ class TA234Com
 		 * 		-Salida: un booleano\n
 		 * 			--True: se ha podido borrar el elemento\n
 		 * 			--False: en caso contrario.*/
-		bool Borrar (const TComplejo &);
+		bool Borrar (TComplejo &);
 
 	private:
 		
@@ -123,6 +123,8 @@ class TA234Com
 		//!	\brief	Método que divide la raíz
 		/*!	Método que divide la raíz en nodos nuevos en caso de que ésta sea un 4-nodo*/
 		void DivideRaiz (TA234Nodo *, TA234Nodo*);
+		
+		TComplejo* Mayor ();
 		
 };
 
@@ -202,6 +204,16 @@ class TA234Nodo
 		//!	\brief	Método que divide un 4-nodo
 		/*!	Método que divide un 4-nodo cuyo padre es un 3-nodo*/
 		void DivideHijoDe3 (TA234Nodo*);
+		
+		void BorrarAux (TComplejo &);
+		
+		void Sustituir (TA234Nodo *, TA234Nodo *, TComplejo& );
+		
+		void Ceder (TA234Nodo *, TA234Nodo *, int );
+		
+		void Combinar (TA234Nodo *&, TA234Nodo *&, int );
+		
+		void CombinarEnUno ();
 };
 
 //!	\brief	Clase TElemColaA234Com (ta234com.h)
