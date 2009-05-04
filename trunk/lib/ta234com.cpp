@@ -8,14 +8,7 @@ TA234Nodo::TA234Nodo (): tipo_nodo(0)
 {
 }
 
-TA234Nodo::TA234Nodo (const TA234Nodo &n): tipo_nodo(n.tipo_nodo), 
-itIz(n.itIz), 
-itMe(n.itMe), 
-itDe(n.itDe), 
-hijoIz(n.hijoIz), 
-hijoMeIz(n.hijoMeIz), 
-hijoMeDe(n.hijoMeDe), 
-hijoDe(n.hijoDe)
+TA234Nodo::TA234Nodo (const TA234Nodo &n): tipo_nodo(n.tipo_nodo), itIz(n.itIz), itMe(n.itMe), itDe(n.itDe), hijoIz(n.hijoIz), hijoMeIz(n.hijoMeIz), hijoMeDe(n.hijoMeDe), hijoDe(n.hijoDe)
 {
 }
 
@@ -366,7 +359,7 @@ TA234Com::TA234Com (): raiz(NULL)
 
 TA234Com::TA234Com (const TA234Com &a)
 {
-	raiz=NULL;
+	raiz = NULL;
 	
 	if (a.raiz != NULL)
 	{
@@ -692,10 +685,15 @@ bool
 TA234Com::EsHoja () const
 {
 	if (raiz!=NULL)
+	{
 		return (raiz -> hijoIz.raiz == NULL && raiz -> hijoMeIz.raiz == NULL && 
 		raiz -> hijoMeDe.raiz == NULL && raiz -> hijoDe.raiz == NULL);
+	}
+	
 	else
-		return false;
+	{
+		return (false);
+	}
 }
 
 int
@@ -705,7 +703,7 @@ TA234Com::Nodos() const
 	
 	if (!EsVacio ())
 	{
-		salida = 1 + raiz->hijoIz.Nodos() + raiz->hijoMeIz.Nodos() + raiz->hijoMeDe.Nodos() + raiz->hijoDe.Nodos();
+		salida = 1 + raiz -> hijoIz.Nodos() + raiz -> hijoMeIz.Nodos() + raiz -> hijoMeDe.Nodos() + raiz -> hijoDe.Nodos();
 	}
 	
 	else
@@ -721,7 +719,7 @@ TA234Com::NodosHoja () const
 {
 	int salida = 0;
 	
-	if (raiz != NULL)
+	if (!EsVacio())
 	{
 		if (EsHoja())
 		{
@@ -740,9 +738,9 @@ TA234Com::NodosHoja () const
 int
 TA234Com::Altura () const
 {
-	int salida=0;
+	int salida = 0;
 	
-	if (raiz!=NULL)
+	if (!EsVacio())
 	{
 		if (EsHoja())
 		{
