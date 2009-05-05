@@ -49,33 +49,29 @@ TA234Nodo::DivideHijoDe2 (TA234Nodo* p)
 	
 	if (p == hijoIz.raiz)
 	{
-		aux = p -> itIz;
-		
-		aux2 = p -> itDe;
-		
-		hijoMeDe.raiz = hijoMeIz.raiz;
-		
 		itMe = itIz;
-		
+
+		hijoMeDe.raiz = hijoMeIz.raiz;
+
 		tipo_nodo++;
-		
-		itIz = p -> itMe;
-		
+
+		itIz = hijoIz.raiz -> itMe;
+
 		hijoMeIz.raiz = new TA234Nodo;
-		
-		hijoMeIz.raiz -> itIz = aux2;
-		
-		hijoMeIz.raiz -> hijoIz = p -> hijoMeDe;
-		
-		hijoMeIz.raiz -> hijoMeIz = p -> hijoDe;
-		
+
 		hijoMeIz.raiz -> tipo_nodo = 1;
-		
-		p -> itMe = p -> itDe = 0;
-		
-		p -> tipo_nodo = 1;
-		
-		p -> hijoMeDe.raiz = p -> hijoDe.raiz = NULL;
+
+		hijoMeIz.raiz -> itIz = hijoIz.raiz -> itDe;
+
+		hijoMeIz.raiz ->hijoIz.raiz = hijoIz.raiz->hijoMeDe.raiz;
+
+		hijoMeIz.raiz ->hijoMeIz.raiz = hijoIz.raiz->hijoDe.raiz;
+
+		hijoIz.raiz->hijoDe.raiz = NULL;
+
+		hijoIz.raiz->hijoMeDe.raiz = NULL;
+
+		hijoIz.raiz -> tipo_nodo = 1;
 	}
 	
 	else if (p == hijoMeIz.raiz)
@@ -761,6 +757,10 @@ TA234Nodo::CombinarEnUno ()
 	delete (iz);
 
 	delete (de);
+
+	iz = NULL;
+
+	de = NULL;
 }
 
 TA234Com::TA234Com (): raiz(NULL)
@@ -1285,6 +1285,8 @@ TA234Com::Borrar (TComplejo &c)
 
 	bool combinar = false;
 
+	bool combina3 = false;
+	
 	bool sustituido = false;
 	
 	if (!EsVacio())
@@ -1390,6 +1392,20 @@ TA234Com::Borrar (TComplejo &c)
 
 				sustituido = false;
 			}
+
+			else if (sustituido && combina3)
+			{
+				combina3 = false;
+
+				sustituido = false;
+
+				padre = hijo;
+
+				hijo = padre -> hijoMeIz.raiz;
+
+				hermano = padre -> hijoIz.raiz;
+
+			}
 			
 			rotar = false;
 			
@@ -1412,7 +1428,7 @@ TA234Com::Borrar (TComplejo &c)
 					{
 						padre -> Combinar (hijo, hermano, comparar);
 
-						combinar = true;
+						combina3 = true;
 					}
 					
 					else

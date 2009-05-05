@@ -443,7 +443,7 @@ int main ()
 	a.Insertar (c13);
 	a.Insertar (c14);
 	a.Insertar (c15);
-	a.Insertar (c16);
+	//a.Insertar (c16);
 	a.Insertar (c17);
 	a.Insertar (c18);
 	a.Insertar (c19);
@@ -455,16 +455,17 @@ int main ()
 	a.Insertar (c25);
 	a.Insertar (c26);
 	
+	//cout << a.Niveles () << endl << a.Nodos()  << endl;;
+	//TA234Com b(a);
+	//cout << (a == b) << endl;
+	a.Borrar (c15);
+	a.Borrar(c10);
+	//cout << endl;
 	cout << a.Niveles () << endl;
 	
-	a.Borrar (c10);
+	/*a.Borrar (c5);
 	
-	cout << endl;
-	cout << a.Niveles () << endl;
-	
-	a.Borrar (c5);
-	
-	cout << endl << a.Niveles () << endl;
+	cout << endl << a.Niveles () << endl;*/
 	
 	# endif
 }
