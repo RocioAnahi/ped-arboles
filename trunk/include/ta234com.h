@@ -123,9 +123,10 @@ class TA234Com
 		//!	\brief	Método que divide la raíz
 		/*!	Método que divide la raíz en nodos nuevos en caso de que ésta sea un 4-nodo*/
 		void DivideRaiz (TA234Nodo *, TA234Nodo*);
-		
+
+		//!	\brief	Método que devuelve el mayor elemento del árbol
+		/*!	Método que devuelve un puntero al mayor elemento del árbol*/
 		TComplejo* Mayor ();
-		
 };
 
 //!	\brief	Clase TA234Nodo (ta234com.h)
@@ -204,15 +205,25 @@ class TA234Nodo
 		//!	\brief	Método que divide un 4-nodo
 		/*!	Método que divide un 4-nodo cuyo padre es un 3-nodo*/
 		void DivideHijoDe3 (TA234Nodo*);
-		
+
+		//!	\brief	Método que se encarga del borrado final de un complejo
+		/*!	Método que se encarga del borrado final de un complejo en el árbol*/
 		void BorrarAux (TComplejo &);
-		
+
+		//!	\brief	Método que sustituye un complejo por el mayor de su izquierda
+		/*!	Método que sustituye un complejo por el mayor de su izquierda*/
 		void Sustituir (TA234Nodo *, TA234Nodo *, TComplejo& );
-		
+
+		//!	\brief	Método que realiza la rotación de complejos 
+		/*!	Método que realiza la rotación de complejos de nodo a nodo en un árbol*/
 		void Ceder (TA234Nodo *, TA234Nodo *, int );
-		
+
+		//!	\brief	Método que realiza una combinación de 3 complejos en un nuevo nodo
+		/*!	Método que realiza la combinación de 3 complejos en un nodo nuevo*/
 		void Combinar (TA234Nodo *&, TA234Nodo *&, int );
-		
+
+		//!	\brief	Método que combina 3 nodos de tipo 2-nodo en un nuevo nodo
+		/*!	Método que combina 3 nodos de tipo dos nodo en un nuevo nodo*/
 		void CombinarEnUno ();
 };
 
