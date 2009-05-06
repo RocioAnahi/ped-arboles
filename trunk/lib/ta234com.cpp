@@ -464,6 +464,8 @@ TA234Nodo::Sustituir (TA234Nodo *hijo, TA234Nodo *hermano, TComplejo& c)
 void
 TA234Nodo::Ceder (TA234Nodo *hijo, TA234Nodo *hermano, int comparar)
 {
+	cout << "entro en ceder" << endl;
+	
 	switch (comparar)
 	{
 		case 1:
@@ -488,6 +490,8 @@ TA234Nodo::Ceder (TA234Nodo *hijo, TA234Nodo *hermano, int comparar)
 
 			hijoMeIz.raiz -> itMe = hijoMeIz.raiz -> itDe;
 			
+			hijoMeIz.raiz -> hijoDe.raiz=NULL;
+			
 		break;
 
 		case 2:
@@ -509,6 +513,8 @@ TA234Nodo::Ceder (TA234Nodo *hijo, TA234Nodo *hermano, int comparar)
 				itIz = hijoIz.raiz -> itMe;
 
 				hijoIz.raiz -> tipo_nodo--;
+				
+				hijoIz.raiz->hijoMeDe.raiz=NULL;
 			}
 
 			else
@@ -518,6 +524,8 @@ TA234Nodo::Ceder (TA234Nodo *hijo, TA234Nodo *hermano, int comparar)
 				itIz = hijoIz.raiz -> itDe;
 
 				hijoIz.raiz -> tipo_nodo--;
+				
+				hijoIz.raiz->hijoDe.raiz=NULL;
 			}
 		
 		break;
@@ -541,6 +549,8 @@ TA234Nodo::Ceder (TA234Nodo *hijo, TA234Nodo *hermano, int comparar)
 				itMe = hijoMeIz.raiz -> itMe;
 
 				hijoMeIz.raiz -> tipo_nodo--;
+				
+				hijoMeIz.raiz->hijoMeDe.raiz=NULL;
 			}
 			
 			else
@@ -550,6 +560,8 @@ TA234Nodo::Ceder (TA234Nodo *hijo, TA234Nodo *hermano, int comparar)
 				itMe = hijoMeIz.raiz -> itDe;
 
 				hijoMeIz.raiz -> tipo_nodo--;
+				
+				hijoMeIz.raiz->hijoDe.raiz=NULL;
 			}
 			
 		break;
@@ -573,6 +585,8 @@ TA234Nodo::Ceder (TA234Nodo *hijo, TA234Nodo *hermano, int comparar)
 				itDe = hijoMeDe.raiz -> itMe;
 
 				hijoMeDe.raiz -> tipo_nodo--;
+				
+				hijoMeDe.raiz->hijoMeDe.raiz=NULL;
 			}
 
 			else
@@ -582,6 +596,8 @@ TA234Nodo::Ceder (TA234Nodo *hijo, TA234Nodo *hermano, int comparar)
 				itDe = hijoMeDe.raiz -> itDe;
 
 				hijoMeDe.raiz -> tipo_nodo--;
+				
+				hijoMeDe.raiz->hijoDe.raiz=NULL;
 			}
 			
 		break;
@@ -591,6 +607,8 @@ TA234Nodo::Ceder (TA234Nodo *hijo, TA234Nodo *hermano, int comparar)
 void
 TA234Nodo::Combinar (TA234Nodo *&hijo, TA234Nodo *&hermano, int comparar)
 {
+	cout << "entro en combinar" << endl;
+	
 	switch (comparar)
 	{
 		case 1:
@@ -613,7 +631,8 @@ TA234Nodo::Combinar (TA234Nodo *&hijo, TA234Nodo *&hermano, int comparar)
 
 			itMe = itDe;
 			
-			delete (hijoMeIz.raiz);
+			if (hijoMeIz.raiz!=NULL)
+				delete (hijoMeIz.raiz);
 			
 			hijoMeIz.raiz = hijoMeDe.raiz;
 
@@ -649,7 +668,8 @@ TA234Nodo::Combinar (TA234Nodo *&hijo, TA234Nodo *&hermano, int comparar)
 
 			itMe = itDe;
 			
-			delete (hijoMeIz.raiz);
+			if (hijoMeIz.raiz!=NULL)
+				delete (hijoMeIz.raiz);
 			
 			hijoMeIz.raiz = hijoMeDe.raiz;
 
@@ -683,7 +703,8 @@ TA234Nodo::Combinar (TA234Nodo *&hijo, TA234Nodo *&hermano, int comparar)
 			
 			itMe = itDe;
 			
-			delete (hijoMeDe.raiz);
+			if (hijoMeDe.raiz!=NULL)
+				delete (hijoMeDe.raiz);
 			
 			hijoMeDe.raiz = hijoDe.raiz;
 
@@ -711,7 +732,8 @@ TA234Nodo::Combinar (TA234Nodo *&hijo, TA234Nodo *&hermano, int comparar)
 			
 			tipo_nodo--;
 			
-			delete (hijoDe.raiz);
+			if (hijoDe.raiz!=NULL)
+				delete (hijoDe.raiz);
 			
 			hijoDe.raiz = NULL;
 
@@ -726,6 +748,8 @@ TA234Nodo::Combinar (TA234Nodo *&hijo, TA234Nodo *&hermano, int comparar)
 void
 TA234Nodo::CombinarEnUno ()
 {
+	cout << "entro en combinar en uno" << endl;
+	
 	TA234Nodo *iz = hijoIz.raiz;
 
 	TA234Nodo *de = hijoMeIz.raiz;
@@ -754,9 +778,17 @@ TA234Nodo::CombinarEnUno ()
 	
 	tipo_nodo = 3;
 	
-	delete (iz);
+	if (iz!=NULL)
+	{
+		cout << "mato a iz" << endl;
+		delete (iz);
+	}
 
-	delete (de);
+	if (de!=NULL)
+	{
+		cout << "mato a de" << endl;
+		delete (de);
+	}
 
 	iz = NULL;
 
