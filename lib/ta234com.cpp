@@ -1191,7 +1191,7 @@ TA234Com::Altura () const
 }
 
 bool 
-TA234Com::Buscar (TComplejo &c) const
+TA234Com::Buscar (TComplejo c)
 {
 	bool salida = false;
 	

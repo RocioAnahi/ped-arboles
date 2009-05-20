@@ -294,7 +294,7 @@ TListaCom::operator== (const TListaCom& lcom) const
 			}
 			
 		}
-		while (aux_this.pos != ultimo && salida == true);	
+		while (aux_this.pos != NULL && salida == true);	
 	}
 	
 	else if (Longitud() == 0 && lcom.Longitud() == 0)

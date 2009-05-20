@@ -74,7 +74,7 @@ class TA234Com
 		 * 		-Salida: un booleano\n
 		 * 			--True: el complejo está en el árbol\n
 		 * 			--False: en caso contrario.*/
-		bool Buscar (TComplejo &)	const;
+		bool Buscar (TComplejo);
 		
 		//!	\brief	Método que indica la altura del árbol
 		/*!	Método que indica la altura del árbol*/
