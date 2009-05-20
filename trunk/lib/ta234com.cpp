@@ -206,7 +206,7 @@ TA234Nodo::DivideHijoDe3 (TA234Nodo* p)
 }
 
 bool
-TA234Nodo::InsertarAux (TComplejo &c)
+TA234Nodo::InsertarAux (TComplejo c)
 {
 	bool salida = false;
 	
@@ -271,7 +271,7 @@ TA234Nodo::InsertarAux (TComplejo &c)
 }
 
 int
-TA234Nodo::Comparar (TComplejo &c)
+TA234Nodo::Comparar (TComplejo c)
 {
 	if (tipo_nodo == 1 && hijoIz.raiz != NULL && hijoMeIz.raiz != NULL)
 	{
@@ -350,7 +350,7 @@ TA234Nodo::Comparar (TComplejo &c)
 }
 
 void
-TA234Nodo::BorrarAux (TComplejo &c)
+TA234Nodo::BorrarAux (TComplejo c)
 {
 	if (tipo_nodo == 1)
 	{
@@ -398,7 +398,7 @@ TA234Nodo::BorrarAux (TComplejo &c)
 }
 
 void
-TA234Nodo::Sustituir (TA234Nodo *hijo, TA234Nodo *hermano, TComplejo& c)
+TA234Nodo::Sustituir (TA234Nodo *hijo, TA234Nodo *hermano, TComplejo  c)
 {
 	TComplejo *complejo = NULL;
 
@@ -975,7 +975,7 @@ TA234Com::Niveles ()
 }
 
 bool
-TA234Com::Insertar (TComplejo &c)
+TA234Com::Insertar (TComplejo c)
 {
 	TA234Nodo *p; // hijo
 	
@@ -1291,7 +1291,7 @@ TA234Com::Buscar (TComplejo c)
 }
 
 bool
-TA234Com::Borrar (TComplejo &c)
+TA234Com::Borrar (TComplejo c)
 {
 	TA234Nodo *padre = NULL;
 	

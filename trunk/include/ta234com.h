@@ -66,7 +66,7 @@ class TA234Com
 		 * 		-Salida: un booleano\n
 		 * 			--True: ha sido posible realizar la inserción\n
 		 * 			--False: en caso contrario*/
-		bool Insertar (TComplejo &);
+		bool Insertar (TComplejo );
 		
 		//!	\brief	Método que indica si un complejo está en el árbol
 		/*!	Método que indica si un complejo está en el árbol\n
@@ -74,7 +74,7 @@ class TA234Com
 		 * 		-Salida: un booleano\n
 		 * 			--True: el complejo está en el árbol\n
 		 * 			--False: en caso contrario.*/
-		bool Buscar (TComplejo);
+		bool Buscar (TComplejo );
 		
 		//!	\brief	Método que indica la altura del árbol
 		/*!	Método que indica la altura del árbol*/
@@ -104,7 +104,7 @@ class TA234Com
 		 * 		-Salida: un booleano\n
 		 * 			--True: se ha podido borrar el elemento\n
 		 * 			--False: en caso contrario.*/
-		bool Borrar (TComplejo &);
+		bool Borrar (TComplejo );
 
 	private:
 		
@@ -192,11 +192,11 @@ class TA234Nodo
 		//!	\brief	Método que indica lo que hacer con el complejo a insertar
 		/*!	Método que indica lo que debe hacer con el complejo a insertar
 		 * 	en función del entero devuelto.*/
-		int Comparar (TComplejo &);
+		int Comparar (TComplejo );
 		
 		//!	\brief	Método auxiliar de la inserción
 		/*!	Método auxiliar de la inserción en un árbol 2-3-4*/
-		bool InsertarAux (TComplejo &);
+		bool InsertarAux (TComplejo );
 		
 		//!	\brief	Método que divide un 4-nodo
 		/*!	Método que divide un 4-nodo cuyo padre es un 2-nodo*/
@@ -208,11 +208,11 @@ class TA234Nodo
 
 		//!	\brief	Método que se encarga del borrado final de un complejo
 		/*!	Método que se encarga del borrado final de un complejo en el árbol*/
-		void BorrarAux (TComplejo &);
+		void BorrarAux (TComplejo );
 
 		//!	\brief	Método que sustituye un complejo por el mayor de su izquierda
 		/*!	Método que sustituye un complejo por el mayor de su izquierda*/
-		void Sustituir (TA234Nodo *, TA234Nodo *, TComplejo& );
+		void Sustituir (TA234Nodo *, TA234Nodo *, TComplejo  );
 
 		//!	\brief	Método que realiza la rotación de complejos 
 		/*!	Método que realiza la rotación de complejos de nodo a nodo en un árbol*/
